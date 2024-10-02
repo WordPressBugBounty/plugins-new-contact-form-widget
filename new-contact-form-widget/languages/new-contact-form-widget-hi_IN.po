@@ -1,0 +1,412 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: new-contact-form-widget\n"
+"POT-Creation-Date: 2018-08-10 16:51+0530\n"
+"PO-Revision-Date: 2018-08-10 16:54+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hi_IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.3\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: all-query-page.php:19
+msgid "All Users Queries"
+msgstr "सभी उपयोगकर्ता क्वेरीज़"
+
+#: all-query-page.php:20
+msgid "Download All User List"
+msgstr "सभी उपयोगकर्ता सूची डाउनलोड करें"
+
+#: all-query-page.php:25
+msgid "# ID"
+msgstr "# आईडी"
+
+#: all-query-page.php:26
+msgid "User Name"
+msgstr "उपयोगकर्ता नाम"
+
+#: all-query-page.php:27
+msgid "User Email"
+msgstr "उपयोगकर्ता ईमेल"
+
+#: all-query-page.php:28
+msgid "Date Time"
+msgstr "दिनांक समय"
+
+#: all-query-page.php:29 all-query-page.php:91
+msgid "View Query"
+msgstr "प्रश्न देखें"
+
+#: all-query-page.php:30
+msgid "Delete"
+msgstr "हटाना"
+
+#: all-query-page.php:177
+msgid "View Contact Query Details"
+msgstr "कोंटेक्ट प्रश्न विवरण देखें"
+
+#: all-query-page.php:181
+msgid "Loading Contact Query Details..."
+msgstr "कोंटेक्ट क्वेरी विवरण लोड हो रहा है ..."
+
+#: all-query-page.php:186
+msgid "Close"
+msgstr "बंद करे"
+
+#: all-query-page.php:339
+msgid "User Name:"
+msgstr "उपयोगकर्ता नाम:"
+
+#: all-query-page.php:340
+msgid "User Email:"
+msgstr "उपयोगकर्ता ईमेल:"
+
+#: all-query-page.php:341
+msgid "User Subject:"
+msgstr "उपयोगकर्ता विषय:"
+
+#: all-query-page.php:342
+msgid "User Query:"
+msgstr "उपयोगकर्ता प्रश्न:"
+
+#: all-query-page.php:343
+msgid "Date Time:"
+msgstr "दिनांक समय:"
+
+#: cfw-menu-pages.php:6
+msgid "Contact Form Queries"
+msgstr "कोंटेक्ट फ़ॉर्म क्वेरीज़"
+
+#: cfw-menu-pages.php:7
+msgid "Shortcode"
+msgstr "शोर्टकोड"
+
+#: cfw-menu-pages.php:8
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+#: cfw-menu-pages.php:9
+msgid "Our Theme"
+msgstr "हमारी थीम"
+
+#: cfw-menu-pages.php:23
+msgid "Contact Form Shortcode"
+msgstr "कोंटेक्ट फ़ॉर्म शोर्टकोड"
+
+#: cfw-menu-pages.php:26
+msgid "Use"
+msgstr "उपयोग"
+
+#: cfw-menu-pages.php:26
+msgid "Shortcode to display Contact Form on any Page / Post."
+msgstr "किसी भी पेज / पोस्ट पर कोंटेक्ट प्रपत्र प्रदर्शित करने के लिए शोर्टकोड।"
+
+#: cfw-menu-pages.php:27
+msgid "Note:"
+msgstr "ध्यान दें:"
+
+#: cfw-menu-pages.php:27
+msgid "Don t use multiple shortcode on same Page / Post."
+msgstr "एक ही पेज / पोस्ट पर एकाधिक शोर्टकोड का उपयोग न करें।"
+
+#: settings-page.php:259
+msgid "Contact Form Settings"
+msgstr "कोंटेक्ट फ़ॉर्म सेटिंग्स"
+
+#: settings-page.php:265
+msgid "Design Settings"
+msgstr "डिजाइन सेटिंग्स"
+
+#: settings-page.php:273
+msgid "Contact Form Title"
+msgstr "कोंटेक्ट फॉर्म शीर्षक"
+
+#: settings-page.php:274
+msgid "Type your Title"
+msgstr "अपना शीर्षक टाइप करें"
+
+#: settings-page.php:280
+msgid "Title Color"
+msgstr "शीर्षक रंग"
+
+#: settings-page.php:281
+msgid "chose form color"
+msgstr "फॉर्म रंग चुना है"
+
+#: settings-page.php:287
+msgid "Contact Form Description"
+msgstr "कोंटेक्ट फ़ॉर्म विवरण"
+
+#: settings-page.php:288
+msgid "Type your description"
+msgstr "अपना विवरण टाइप करें"
+
+#: settings-page.php:294
+msgid "Name Field Place Holder Text"
+msgstr "नाम फ़ील्ड प्लेस धारक पाठ"
+
+#: settings-page.php:295
+msgid "Type your Name"
+msgstr "अपना नाम लिखें"
+
+#: settings-page.php:301
+msgid "Email Field Place Holder Text"
+msgstr "ईमेल फ़ील्ड प्लेस होल्डर टेक्स्ट"
+
+#: settings-page.php:302
+msgid "Type your Email"
+msgstr "ईमेल फ़ील्ड प्लेस होल्डर टेक्स्ट"
+
+#: settings-page.php:308
+msgid "Subject Field Place Holder Text"
+msgstr "विषय फ़ील्ड प्लेस धारक पाठ"
+
+#: settings-page.php:309
+msgid "Type your Subject"
+msgstr "अपना विषय टाइप करें"
+
+#: settings-page.php:315
+msgid "Message Field Place Holder Text"
+msgstr "संदेश फ़ील्ड प्लेस धारक पाठ"
+
+#: settings-page.php:316
+msgid "Type your Message"
+msgstr "अपना संदेश टाइप करें"
+
+#: settings-page.php:321
+msgid "Place Holder Text Color"
+msgstr "प्लेस धारक पाठ रंग"
+
+#: settings-page.php:324
+msgid "Sky Blue"
+msgstr "आसमानी नीला"
+
+#: settings-page.php:326 settings-page.php:344 settings-page.php:419
+msgid "Red"
+msgstr "लाल"
+
+#: settings-page.php:328 settings-page.php:346 settings-page.php:415
+msgid "Green"
+msgstr "हरा"
+
+#: settings-page.php:330 settings-page.php:348
+msgid "Yellow"
+msgstr "पीला"
+
+#: settings-page.php:332 settings-page.php:350 settings-page.php:376
+msgid "Black"
+msgstr "काली"
+
+#: settings-page.php:334 settings-page.php:352 settings-page.php:378 settings-page.php:409
+msgid "White"
+msgstr "सफेद"
+
+#: settings-page.php:339
+msgid "Form Label & Icon Color"
+msgstr "फॉर्म लेबल और आइकन रंग"
+
+#: settings-page.php:342 settings-page.php:413
+msgid "Blue"
+msgstr "नीला"
+
+#: settings-page.php:354
+msgid "Gold"
+msgstr "सोना"
+
+#: settings-page.php:356
+msgid "Orange"
+msgstr "नारंगी"
+
+#: settings-page.php:361
+msgid "Form Background Color"
+msgstr "फॉर्म पृष्ठभूमि रंगीन"
+
+#: settings-page.php:364
+msgid "Radiant Orchid"
+msgstr "और सफेद"
+
+#: settings-page.php:366
+msgid "Royal Blue"
+msgstr "शाही नीला"
+
+#: settings-page.php:368
+msgid "Aurora Red"
+msgstr "अरोड़ा लाल"
+
+#: settings-page.php:370
+msgid "Misted Yellow"
+msgstr "मुट्ठी पीला"
+
+#: settings-page.php:372
+msgid "Sangria"
+msgstr "Sangria"
+
+#: settings-page.php:374
+msgid "Mauve Mist"
+msgstr "माउव मिस्ट"
+
+#: settings-page.php:383
+msgid "Show Query Per Page"
+msgstr "प्रति पृष्ठ क्वेरी दिखाएं"
+
+#: settings-page.php:385
+msgid "Select Number of Rows"
+msgstr "पंक्तियों की संख्या का चयन करें"
+
+#: settings-page.php:400
+msgid "Form Submit Button Text"
+msgstr "फॉर्म सबमिट बटन पाठ"
+
+#: settings-page.php:406
+msgid "Form Submit Button Color"
+msgstr "फॉर्म बटन रंग जमा करें"
+
+#: settings-page.php:411
+msgid "Light Blue"
+msgstr "हल्का नीला"
+
+#: settings-page.php:417
+msgid "Golden"
+msgstr "स्वर्ण"
+
+#: settings-page.php:425
+msgid "Custom CSS"
+msgstr "कस्टम सीएसएस"
+
+#: settings-page.php:426
+msgid "Type your CSS without <style>...</style> tag "
+msgstr " टैग के बिना अपना सीएसएस टाइप करें"
+
+#: settings-page.php:435
+msgid "Message Setting"
+msgstr "संदेश सेटिंग"
+
+#: settings-page.php:442
+msgid "Blank Name Error Text"
+msgstr "खाली नाम त्रुटि पाठ"
+
+#: settings-page.php:443
+msgid "Type your Name Error Text"
+msgstr "अपना नाम त्रुटि टेक्स्ट टाइप करें"
+
+#: settings-page.php:449
+msgid "Blank Email Error Text"
+msgstr "खाली ईमेल त्रुटि पाठ"
+
+#: settings-page.php:450 settings-page.php:457
+msgid "Type your Email Error Text"
+msgstr "अपना ईमेल त्रुटि टेक्स्ट टाइप करें"
+
+#: settings-page.php:456
+msgid "Invalid Email Error Text"
+msgstr "अमान्य ईमेल त्रुटि पाठ"
+
+#: settings-page.php:463
+msgid "Blank Subject Error Text"
+msgstr "खाली विषय त्रुटि पाठ"
+
+#: settings-page.php:464
+msgid "Type your Subject Error Text"
+msgstr "अपना विषय त्रुटि टेक्स्ट टाइप करें"
+
+#: settings-page.php:470
+msgid "Blank Message Error Text"
+msgstr "खाली संदेश त्रुटि पाठ"
+
+#: settings-page.php:471
+msgid "Type your Message Error Text"
+msgstr "अपना संदेश त्रुटि टेक्स्ट टाइप करें"
+
+#: settings-page.php:477
+msgid "Message To User / Visitor After Successful Query Submission"
+msgstr "सफल क्वेरी सबमिशन के बाद उपयोगकर्ता / आगंतुक को संदेश"
+
+#: settings-page.php:478 settings-page.php:485
+msgid "Type your message Here"
+msgstr "अपना संदेश यहां टंकित करें"
+
+#: settings-page.php:484
+msgid "Message To User / Visitor When Query Submission Failed"
+msgstr "क्वेरी सबमिशन विफल होने पर उपयोगकर्ता / विज़िटर को संदेश"
+
+#: settings-page.php:494
+msgid "Auto Responder Setting"
+msgstr "ऑटो प्रतिक्रियादाता सेटिंग"
+
+#: settings-page.php:499 settings-page.php:513 settings-page.php:527
+msgid "Upgrade to Premium Version"
+msgstr "प्रीमियम संस्करण में अपग्रेड करें"
+
+#: settings-page.php:509
+msgid "Email Setting"
+msgstr "ईमेल सेटिंग"
+
+#: settings-page.php:522
+msgid "Google reCAPTCHA"
+msgstr "गूगल रिकेपचा"
+
+#: settings-page.php:532
+msgid "Save"
+msgstr "संचय"
+
+#: settings-page.php:539
+msgid "Saving setting is under processing..."
+msgstr "सेटिंग सहेज रहा है ..."
+
+#: settings-page.php:544
+msgid "Setting successfully saved."
+msgstr "सेटिंग सफलतापूर्वक सहेजा गया।"
+
+#: settings-page.php:563
+msgid "Plugin s Bale Offer"
+msgstr "प्लगइन एस बेल प्रस्ताव"
+
+#: settings-page.php:564
+msgid "Get All Premium Plugin - 18+ Premium Plugins ( Personal Licence) in just $149 "
+msgstr "सभी प्रीमियम प्लगइन प्राप्त करें - 18+ प्रीमियम प्लगइन्स (व्यक्तिगत लाइसेंस) केवल $149 में"
+
+#: settings-page.php:565
+msgid ""
+"8+ gallery plugins, 3+ Slider Plugin , Event , Testimonial , Contact Form, Social media, "
+"Popup Box, Weather Effect, Social share"
+msgstr ""
+"8+ गैलरी प्लगइन्स, 3+ स्लाइडर प्लगइन, इवेंट, प्रशंसापत्र, संपर्क फ़ॉर्म, सोशल मीडिया, पॉपअप बॉक्स, मौसम "
+"प्रभाव, सामाजिक साझा"
+
+#: settings-page.php:566
+msgid "For $149 Only"
+msgstr "केवल $14 9 के लिए"
+
+#: settings-page.php:569
+msgid "BUY NOW"
+msgstr "अभी खरीदें"
+
+#: shortcode.php:130
+msgid "Contact Form"
+msgstr "कोंटेक्ट फॉर्म"
+
+#: shortcode.php:204
+msgid "Name"
+msgstr "नाम"
+
+#: shortcode.php:210
+msgid "Email"
+msgstr "ईमेल"
+
+#: shortcode.php:217
+msgid "Subject"
+msgstr "विषय"
+
+#: shortcode.php:223
+msgid "Message"
+msgstr "संदेश"
+
+#: shortcode.php:236
+msgid "Please wait submitting your query."
+msgstr "कृपया अपनी क्वेरी सबमिट करने का इंतजार करें।"
