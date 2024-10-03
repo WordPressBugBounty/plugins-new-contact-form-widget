@@ -47,16 +47,6 @@ Benefit from the plugin’s unique Query Table feature, an innovative approach t
 > #### **Demo for Lite and Pro Version**
 
 > * [Contact Form Premium](https://awplife.com/demo/contact-form-premium/ "Contact Form Premium")
-> * [Form With Logo](https://awplife.com/demo/contact-form-premium/contact-form-logo/ "With Logo")
-> * [Form Without Logo](https://awplife.com/demo/contact-form-premium/contact-form-without-logo/ "Without Logo")
-> * [Logo Size](https://awplife.com/demo/contact-form-premium/contact-form-logo-size/ "Logo Size")
-> * [Form Tittle Size](https://awplife.com/demo/contact-form-premium/contact-form-tittle-size/ "Tittle Size")
-> * [Title Color](https://awplife.com/demo/contact-form-premium/contact-form-title-color/ "Title Color")
-> * [Label Icon Color](https://awplife.com/demo/contact-form-premium/label-icon-color/ "Label Icon Color")
-> * [Place Holder Color](https://awplife.com/demo/contact-form-premium/place-holder-color/ "Place Holder Color")
-> * [Background Color](https://awplife.com/demo/contact-form-premium/background-color/ "Background Color")
-> * [Contact Form Widget](https://awplife.com/demo/contact-form-premium/contact-form-widget/ "Widget")
-> * [Admin Demo](https://awplife.com/demo/contact-form-premium-admin-demo/ "Admin Demo")
 
 
 == WHAT CAN YOU DO WITH FORMS PLUGIN ==
