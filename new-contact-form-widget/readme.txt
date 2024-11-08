@@ -3,8 +3,8 @@ Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkh
 Donate link: https://paypal.me/awplife
 Tags: contact form widget, Support Query builder, contact page, contact, Contact Us
 Requires at least: 3.8
-Tested up to: 6.6.1
-Stable tag: 1.4.3
+Tested up to: 6.6.2
+Stable tag: 1.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,12 @@ Please post your question on plugin support forum
 https://wordpress.org/support/plugin/new-contact-form-widget/
 
 == Changelog ==
+
+= 1.4.4 =
+
+* Tested plugin for wordpress 6.6.2
+* wordpress security issues fixed.
+* Additional changes: None.
 
 = 1.4.3 =
 
