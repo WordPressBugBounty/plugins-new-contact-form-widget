@@ -38,7 +38,7 @@ https://www.youtube.com/watch?v=hWjQ3NOmfTs
 
 **Upgrade To Premium Plugin - <a href="https://awplife.com/wordpress-plugins/contact-form-premium/">Click Here</a>**
 
-**Try Premium Plugin  - <a href="https://awplife.com/demo/contact-form-premium-admin-demo/">Click Here</a>**
+**Try Premium Plugin  - <a href="https://awplife.com/demo/contact-form-premium/how-to-test-premium-plugin/">Click Here</a>**
 
 == QUERY TABLE FUNCTION ==
 
