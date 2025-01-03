@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 Plugin Name:  New Contact Form Widget & Shortcode [Standard] 
 Plugin URI: https://awplife.com/wordpress-plugins/contact-form-premium/
 Description: Add Contact Form Widget and Shortcode On WordPress
-Version: 1.4.4
+Version: 1.4.5
 Author: A WP Life
 Author URI: https://awplife.com/wordpress-plugins/contact-form-premium/
 Text Domain: new-contact-form-widget
