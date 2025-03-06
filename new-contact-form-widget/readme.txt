@@ -8,8 +8,7 @@ Stable tag: 1.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create a powerful and the best Contact Form for WordPress.
-Design, craft, and manage powerful Contact Pages, Form Makers, and Query Tables effortlessly.
+Create the best Contact Form for WordPress. Design, manage powerful contact pages, query tables & forms effortlessly for makers & businesses!
 
 == Description ==
 
