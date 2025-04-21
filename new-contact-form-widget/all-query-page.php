@@ -17,7 +17,7 @@ if(isset($all_setttings['show_query'])) {
 ?>
 <div>
 	<h1 style="float: left; width:45%; "><?php esc_html_e('All Users Queries', 'new-contact-form-widget'); ?></h1>
-	<a class="btn btn-primary" style="float: right; margin-top: 20px; margin-right: 20px;" onclick="return DownloadList();"><i style="margin-right: 10px;" class="fa fa-download"></i><?php esc_html_e('Download All User List', 'new-contact-form-widget'); ?></a>
+	<a class="btn btn-primary" style="float: right; margin-top: 20px; margin-right: 20px;" onclick="return DownloadList(<?php echo wp_create_nonce( "download_user_list_action" ); ?>);"><i style="margin-right: 10px;" class="fa fa-download"></i><?php esc_html_e('Download All User List', 'new-contact-form-widget'); ?></a>
 </div>
 <table class="table  table-bordered table-hover" style="background-color: #FFFFFF;">
 	<thead>
@@ -33,8 +33,6 @@ if(isset($all_setttings['show_query'])) {
 	</thead>
 	<tbody>
 		<?php
-			
-		
 			//fetch all user queries
 			global $wpdb;
 			$contact_form_table_name = $wpdb->prefix . 'awp_contact_form';
@@ -196,12 +194,11 @@ if(isset($all_setttings['show_query'])) {
 <script>
 <?php  
 
-$rand = rand(1,1000);
-					$upload_dir = wp_upload_dir();
-
+$rand = wp_rand();
+$upload_dir = wp_upload_dir();
 
 ?>
-function DownloadList(){
+function DownloadList(nonce){
 	//Ajax download user list code
 	var DownloadUsersList = new XMLHttpRequest();
 	//check object request & response
@@ -210,11 +207,7 @@ function DownloadList(){
 			 if((DownloadUsersList.responseText.indexOf("file-created") >= 0)) {
                 var file_path = DownloadUsersList.responseText;
                 if(file_path !== "File not created.") {
-                   var create_file_url = '<?php
-					echo $upload_dir["baseurl"] . "/all-users-list-" . $rand . ".csv";
-				?>';
-
-
+                   var create_file_url = '<?php echo $upload_dir["baseurl"] . "/all-users-list-" . $rand . ".csv"; ?>';
                     window.open(create_file_url, '_blank'); // This will initiate file download
 
                     // Now you need to send another request to delete the file
@@ -234,13 +227,11 @@ function DownloadList(){
 		}
 	};	
 
-	var create_file_url = '<?php 
-		echo $upload_dir["baseurl"] . "/all-users-list-" . $rand . ".csv";
-	?>';	
+	var create_file_url = '<?php echo $upload_dir["baseurl"] . "/all-users-list-" . $rand . ".csv"; ?>';	
 	//data post by object
 	DownloadUsersList.open("POST", location.href, true);
 	DownloadUsersList.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	DownloadUsersList.send('action=download-user-list&file_path=' + create_file_url);
+	DownloadUsersList.send('action=download-user-list&file_path=' + create_file_url + '&_wpnonce=' + nonce );
 }
 
 function ManageContactQueries(action, id, nonce) {
@@ -425,6 +416,12 @@ if(isset($_POST['action'])) {
 
 		//download user list
 		if($action == "download-user-list") {
+			
+			// Verify nonce
+			if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'download_user_list_action')) {
+				echo 'Nonce verification failed.';
+				wp_die('Nonce verification failed.');
+			}
 
 			// Assuming $create_file_path comes from $_POST['file_path'], you need to validate and sanitize it.
 			$create_file_path = $_POST['file_path'];
