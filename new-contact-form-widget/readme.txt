@@ -3,8 +3,8 @@ Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkh
 Donate link: https://paypal.me/awplife
 Tags: contact form, form builder, contact form widget, query table, contact page
 Requires at least: 4.0
-Tested up to: 6.8.1
-Stable tag: 1.4.8
+Tested up to: 6.8.2
+Stable tag: 1.4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,11 @@ Yes. Premium features include more design options, extra templates, export tools
 ---
 
 == Changelog ==
+
+= 1.4.9
+
+* Tested plugin for wordpress 6.8.2
+
 
 = 1.4.8
 
