@@ -17,7 +17,7 @@ if(isset($all_setttings['show_query'])) {
 ?>
 <div>
 	<h1 style="float: left; width:45%; "><?php esc_html_e('All Users Queries', 'new-contact-form-widget'); ?></h1>
-	<a class="btn btn-primary" style="float: right; margin-top: 20px; margin-right: 20px;" onclick="return DownloadList(<?php echo wp_create_nonce( "download_user_list_action" ); ?>);"><i style="margin-right: 10px;" class="fa fa-download"></i><?php esc_html_e('Download All User List', 'new-contact-form-widget'); ?></a>
+	<a class="btn btn-primary" style="float: right; margin-top: 20px; margin-right: 20px;" onclick="return DownloadList('<?php echo wp_create_nonce( "download_user_list_action" ); ?>');"><i style="margin-right: 10px;" class="fa fa-download"></i><?php esc_html_e('Download All User List', 'new-contact-form-widget'); ?></a>
 </div>
 <table class="table  table-bordered table-hover" style="background-color: #FFFFFF;">
 	<thead>
