@@ -3,18 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 function contact_form_shortcode_function( $atts ){
 ob_start();
-	///css
-	wp_enqueue_style( 'cfw-bootstrap-css', plugin_dir_url( __FILE__ ).'css/cfw-bootstrap.css' );
-	wp_enqueue_style( 'cfw-font-awesome-css', plugin_dir_url( __FILE__ ).'css/font-awesome.min.css' );
-		
-	//js
-	wp_enqueue_script( 'jquery');
-	wp_enqueue_script( 'cfw-bootstrap-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap.js', array('jquery'), '3.3.6', false );
-	wp_enqueue_script( 'cfw-ajax', plugin_dir_url( __FILE__ ) . 'js/cfw-ajax.js', array( 'jquery' ), '', true );
-	wp_localize_script( 'cfw-ajax', 'cfw_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-	wp_enqueue_style( 'wp-color-picker' ); 
-	wp_enqueue_script( 'cfw-color-picker-js',  plugin_dir_url( __FILE__ ).'js/cfw-color-picker.js', array( 'jquery', 'wp-color-picker' ), '', true  );
-	
 	// load saved setting from option table
 	$all_setttings = get_option('contact_form_settings');
 	//print_r($all_setttings);
@@ -155,20 +143,20 @@ ob_start();
             border-radius: 5px;
         }
 		.cfw-container {
-            background-color: <?php echo $bg_color; ?>;
+            background-color: <?php echo esc_attr($bg_color); ?>;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: <?php echo $contact_form_width; ?>% !important;
+            max-width: <?php echo esc_attr($contact_form_width); ?>% !important;
         }
 		.cfw-container h2 {
-            color: <?php echo $title_color; ?> !important;
+            color: <?php echo esc_attr($title_color); ?> !important;
         }
 		
 		.cfw-form-align {
 			display: flex;
-			justify-content: <?php echo $cfw_form_order; ?>;
+			justify-content: <?php echo esc_attr($cfw_form_order); ?>;
 		}
 
 		.form-group {
@@ -183,7 +171,7 @@ ob_start();
             width: 100%;
             font-size: 20px!important;
         }
-			<?php echo $cus_css; ?>
+			<?php echo wp_strip_all_tags($cus_css); ?>
 		</style>
 		<?php 
 			if ($contact_form_template == 'template1') {
@@ -201,26 +189,26 @@ ob_start();
 					<p class="cwf-desc"><?php echo esc_html($description_field); ?></p>
 					<div class="form-row">
 						<div class="form-group">
-							<label for="name"> Name</label>
-							<input type="text" class="form-control" id="name" name="name" placeholder="<?php echo esc_html($name_field); ?>" maxlength="25">
-							<p class="cfw-error name-error alert alert-warning"><strong><?php echo $name_error_field; ?></strong></p>
+							<label for="name"><?php esc_html_e( 'Name', 'new-contact-form-widget' ); ?></label>
+							<input type="text" class="form-control" id="name" name="name" placeholder="<?php echo esc_attr($name_field); ?>" maxlength="25">
+							<p class="cfw-error name-error alert alert-warning"><strong><?php echo esc_html($name_error_field); ?></strong></p>
 						</div>
 						<div class="form-group">
-							<label for="email"> Email</label>
-							<input type="text" class="form-control" id="email" name="email" placeholder="<?php echo $email_field; ?>">
-							<p class="cfw-error email-error alert alert-warning"><strong><?php echo $email_error_field; ?></strong></p>
-							<p class="cfw-error email-error-2 alert alert-warning"><strong><?php echo $email_error_field_2; ?></strong></p>
+							<label for="email"><?php esc_html_e( 'Email', 'new-contact-form-widget' ); ?></label>
+							<input type="text" class="form-control" id="email" name="email" placeholder="<?php echo esc_attr($email_field); ?>">
+							<p class="cfw-error email-error alert alert-warning"><strong><?php echo esc_html($email_error_field); ?></strong></p>
+							<p class="cfw-error email-error-2 alert alert-warning"><strong><?php echo esc_html($email_error_field_2); ?></strong></p>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="subject"> Subject</label>
-						<input type="text" class="form-control" id="subject" name="subject" placeholder="<?php echo $subject_field; ?>" maxlength="50">
-						<p class="cfw-error subject-error alert alert-warning"><strong><?php echo $subject_error_field; ?></strong></p>
+						<label for="subject"><?php esc_html_e( 'Subject', 'new-contact-form-widget' ); ?></label>
+						<input type="text" class="form-control" id="subject" name="subject" placeholder="<?php echo esc_attr($subject_field); ?>" maxlength="50">
+						<p class="cfw-error subject-error alert alert-warning"><strong><?php echo esc_html($subject_error_field); ?></strong></p>
 					</div>
 					<div class="form-group">
-						<label for="message"> Message</label>
-						<textarea class="form-control" id="message" name="message" placeholder="<?php echo $message_field; ?>" maxlength="500"></textarea>
-						<p class="cfw-error message-error alert alert-warning"><strong><?php echo $message_error_field; ?></strong></p>
+						<label for="message"><?php esc_html_e( 'Message', 'new-contact-form-widget' ); ?></label>
+						<textarea class="form-control" id="message" name="message" placeholder="<?php echo esc_attr($message_field); ?>" maxlength="500"></textarea>
+						<p class="cfw-error message-error alert alert-warning"><strong><?php echo esc_html($message_error_field); ?></strong></p>
 					</div>
 					
 					<div class="form-group">

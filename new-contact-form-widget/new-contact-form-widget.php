@@ -2,11 +2,11 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
 /*
 Plugin Name:  New Contact Form Widget & Shortcode [Standard] 
-Plugin URI: https://awplife.com/wordpress-plugins/contact-form-premium/
+Plugin URI: https://awplife.com/
 Description: Add Contact Form Widget and Shortcode On WordPress
-Version: 1.5.1
+Version: 1.5.2
 Author: A WP Life
-Author URI: https://awplife.com/wordpress-plugins/contact-form-premium/
+Author URI: https://awplife.com/
 Text Domain: new-contact-form-widget
 Domain Path: /languages
 */
@@ -14,19 +14,23 @@ Domain Path: /languages
 // create table when pluign activate
 register_activation_hook( __FILE__, 'cfw_install_script' );
 function cfw_install_script() {
-	//load create table file here
 	global $wpdb;
 	$table_name = $wpdb->prefix . "awp_contact_form";
-	$create_contact_form_query = "CREATE TABLE IF NOT EXISTS `$table_name` (
-	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`name` varchar(256) NOT NULL,
-	`email` varchar(256) NOT NULL,
-	`subject` varchar(256) NOT NULL,
-	`message` text NOT NULL,
-	`date_time` datetime NOT NULL,
-	`status` varchar(50) NOT NULL
-	) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
-	$wpdb->query($create_contact_form_query);
+	$charset_collate = $wpdb->get_charset_collate();
+
+	$create_contact_form_query = "CREATE TABLE $table_name (
+		id int(11) NOT NULL AUTO_INCREMENT,
+		name varchar(256) NOT NULL,
+		email varchar(256) NOT NULL,
+		subject varchar(256) NOT NULL,
+		message text NOT NULL,
+		date_time datetime NOT NULL,
+		status varchar(50) NOT NULL,
+		PRIMARY KEY  (id)
+	) $charset_collate;";
+
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	dbDelta( $create_contact_form_query );
 }
 
 // run when you de-activate this plugin
@@ -51,10 +55,10 @@ add_action( 'wp_ajax_submit_user_query', 'submit_user_query_handle' );
 add_action( 'wp_ajax_nopriv_submit_user_query', 'submit_user_query_handle' ); // need this to serve non logged in users
 
 function submit_user_query_handle(){
-	if(isset($_POST['action']) && $_POST['formsdata']) {
-		$cfw_query_nonce_value = $_POST['security'];
-		if(!wp_verify_nonce( $cfw_query_nonce_value, 'cfw_query_nonce' )) {
-			$action = $_POST['action'];
+	if(isset($_POST['action']) && isset($_POST['formsdata'])) {
+		$cfw_query_nonce_value = isset($_POST['security']) ? sanitize_text_field($_POST['security']) : '';
+		if(wp_verify_nonce( $cfw_query_nonce_value, 'cfw_query_nonce' )) {
+			$action = sanitize_text_field($_POST['action']);
 			//convert sterilise forms data into array
 			$cfw_data = array();
 			parse_str($_POST['formsdata'], $cfw_data);
@@ -71,7 +75,6 @@ function submit_user_query_handle(){
 				//data array
 				$cfw_columns_data = array(
 					//column_name => field_value
-					'id' => NULL,
 					'name' => $name,
 					'email' => $email,
 					'subject' => $subject,
@@ -81,7 +84,7 @@ function submit_user_query_handle(){
 				);
 
 				//format array
-				$cfw_data_format = array('%d', '%s', '%s', '%s', '%s', '%s', '%s');
+				$cfw_data_format = array('%s', '%s', '%s', '%s', '%s', '%s');
 				
 				// load saved message
 				$all_setttings = get_option('contact_form_settings');
@@ -100,6 +103,63 @@ function submit_user_query_handle(){
 			}
 		}// verify query nonce value
 	}// end of isset
+	wp_die();
+}
+
+// Enqueue Assets
+add_action( 'wp_enqueue_scripts', 'cfw_frontend_assets' );
+function cfw_frontend_assets() {
+	wp_enqueue_style( 'cfw-bootstrap-css', plugin_dir_url( __FILE__ ).'css/cfw-bootstrap.css' );
+	wp_enqueue_style( 'cfw-font-awesome-css', plugin_dir_url( __FILE__ ).'css/font-awesome.min.css' );
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'cfw-bootstrap-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap.js', array('jquery'), '3.3.6', false );
+	wp_enqueue_script( 'cfw-ajax', plugin_dir_url( __FILE__ ) . 'js/cfw-ajax.js', array( 'jquery' ), '', true );
+	wp_localize_script( 'cfw-ajax', 'cfw_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+}
+
+
+/**
+ * Handle CSV Download early to avoid "Headers already sent" error
+ */
+add_action( 'admin_init', 'cfw_handle_csv_download' );
+function cfw_handle_csv_download() {
+	if ( isset( $_GET['page'] ) && $_GET['page'] === 'cfw-all-queries' && isset( $_GET['action'] ) && $_GET['action'] === 'download-user-list' ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$nonce = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
+		if ( ! wp_verify_nonce( $nonce, 'download_user_list_action' ) ) {
+			wp_die( esc_html__( 'Nonce verification failed.', 'new-contact-form-widget' ) );
+		}
+
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'awp_contact_form';
+		$user_search_query_result = $wpdb->get_results( "SELECT * FROM `$table_name` ORDER BY date_time DESC" );
+
+		if ( ! empty( $user_search_query_result ) ) {
+			header( 'Content-Type: text/csv; charset=utf-8' );
+			header( 'Content-Disposition: attachment; filename=contact-queries-' . date( 'Y-m-d' ) . '.csv' );
+			$output = fopen( 'php://output', 'w' );
+			fputcsv( $output, array( '#', 'Name', 'Email', 'Subject', 'Date' ), ',', '"', '\\' );
+
+			$no = 1;
+			foreach ( $user_search_query_result as $single_row ) {
+				fputcsv( $output, array(
+					$no,
+					$single_row->name,
+					$single_row->email,
+					$single_row->subject,
+					$single_row->date_time
+				), ',', '"', '\\' );
+				$no++;
+			}
+			fclose( $output );
+			exit;
+		} else {
+			wp_die( esc_html__( 'No queries found to export.', 'new-contact-form-widget' ) );
+		}
+	}
 }
 
 add_action( 'widgets_init', function(){
@@ -123,17 +183,6 @@ class cfw_Widget extends WP_Widget {
 	 * Outputs of the widget
 	 */
 	public function widget( $args, $instance ) {
-		
-		//css
-		wp_enqueue_style( 'cfw-bootstrap-css', plugin_dir_url( __FILE__ ).'css/cfw-bootstrap.css' );
-		wp_enqueue_style( 'cfw-font-awesome-css', plugin_dir_url( __FILE__ ).'css/font-awesome.min.css' );
-		
-		//js
-		wp_enqueue_script( 'jquery');
-		wp_enqueue_script( 'cfw-bootstrap-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap.js', array('jquery'), '3.3.6', false );
-		wp_enqueue_script( 'cfw-ajax', plugin_dir_url( __FILE__ ) . 'js/cfw-ajax.js', array( 'jquery' ), '', true );
-		wp_localize_script( 'cfw-ajax', 'cfw_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );		
-		
 		echo $args['before_widget'];
 		// widget title
 		if ( ! empty( $instance['title'] ) ) {
@@ -284,7 +333,7 @@ class cfw_Widget extends WP_Widget {
             width: 100%;
         }
 		.cfw-container h2 {
-            color: <?php echo $title_color; ?> !important;
+            color: <?php echo esc_attr($title_color); ?> !important;
         }
 
 		.form-group {
@@ -299,7 +348,7 @@ class cfw_Widget extends WP_Widget {
             width: 100%;
             font-size: 20px!important;
         }
-			<?php echo $cus_css; ?>
+			<?php echo wp_strip_all_tags($cus_css); ?>
 		</style>
 		<?php 
 			if ($contact_form_template == 'template1') {

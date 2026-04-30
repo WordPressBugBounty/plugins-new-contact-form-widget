@@ -4,7 +4,7 @@ Donate link: https://paypal.me/awplife
 Tags: contact form, form builder, contact widget, query form, email form
 Requires at least: 4.0
 Tested up to: 6.9
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,12 @@ The form uses secure submission methods and sanitizes all input data to protect 
 No, the plugin is lightweight and loads only necessary assets on pages where the form appears.
 
 == Changelog ==
+
+= 1.5.2 =
+* Fixed "View Query" modal popup functionality
+* Hardened security with proper nonce verification and capability checks
+* Optimized "Download Query List" to prevent header errors
+* Improved asset loading for better compatibility
 
 = 1.5.1 =
 * Tested with WordPress 6.9

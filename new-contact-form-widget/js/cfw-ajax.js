@@ -47,12 +47,13 @@ function ValidateForm(query_nonce_value) {
 	
 	var alldata = {
 		'action': 'submit_user_query',
-		'formsdata': jQuery("#user-contact-form").serialize() + '&security=' + query_nonce_value,
+		'formsdata': jQuery("#user-contact-form").serialize(),
+		'security': query_nonce_value
 	};
 
 	jQuery.post(cfw_ajax.ajaxurl, alldata, function(response) {
 		jQuery("#awp-loading-icon").hide();
 		jQuery("#contact-result").show();
-		jQuery("#contact-result").text(response.substring(0, response.indexOf('0')));		
+		jQuery("#contact-result").text(response);		
 	});
 }

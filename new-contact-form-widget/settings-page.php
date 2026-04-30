@@ -7,8 +7,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	wp_enqueue_style( 'cfw-metabox-css', plugin_dir_url( __FILE__ ).'css/metabox.css' );
 	wp_enqueue_script( 'cfw-boostrap-js', plugin_dir_url( __FILE__ ).'js/bootstrap.js', array('jquery'), '3.3.6', true );
 	wp_enqueue_style( 'wp-color-picker' ); 
-	
-	
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
 	// js
 	wp_enqueue_script('jquery');
 	wp_enqueue_script( 'cfw-color-picker-js',  plugin_dir_url( __FILE__ ).'js/cfw-color-picker.js', array( 'jquery', 'wp-color-picker' ), '', true  );
@@ -200,7 +201,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			</div>
 			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 bhoechie-tab">
 				<div class="bhoechie-tab-content active">
-					<h1><?php esc_html_e( 'Select Template Design', 'abc-pricing-table' ); ?></h1>
+					<h1><?php esc_html_e( 'Select Template Design', 'new-contact-form-widget' ); ?></h1>
 					<hr>
 					<div id="contact_form_template">
 						<div class="row">
@@ -511,10 +512,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					</div>
 
 					<div class="">
-						<h2><strong><?php esc_html_e( 'Offer:', 'new-contact-form-widget' ); ?></strong> <?php esc_html_e( 'Upgrade To Premium Just In Half Price ', 'modal-popup-box' ); ?><strike><?php esc_html_e( '$19.99', 'new-contact-form-widget' ); ?></strike> <strong><?php esc_html_e( '$ 12.99', 'new-contact-form-widget' ); ?></strong></h2>
+						<h2><strong><?php esc_html_e( 'Offer:', 'new-contact-form-widget' ); ?></strong> <?php esc_html_e( 'Upgrade To Premium Just In Half Price ', 'new-contact-form-widget' ); ?><strike><?php esc_html_e( '$19.99', 'new-contact-form-widget' ); ?></strike> <strong><?php esc_html_e( '$ 12.99', 'new-contact-form-widget' ); ?></strong></h2>
 						<br>
 						<a href="https://awplife.com/wordpress-plugins/contact-form-wordpress-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Premium Version Details', 'new-contact-form-widget' ); ?></a>
-						<a href="https://awplife.com/demo/contact-form-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Check Live Demo', 'modal-popup-box' ); ?></a>
+						<a href="https://awplife.com/demo/contact-form-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Check Live Demo', 'new-contact-form-widget' ); ?></a>
 						<a href="https://awplife.com/demo/contact-form-premium/how-to-test-premium-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Try Pro Version', 'new-contact-form-widget' ); ?></a>
 					</div>
 				</div>
@@ -523,14 +524,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					<hr>
 					<!--Grid-->
 					<div class="" style="padding-left: 10px;">
-						<p class="ms-title"><?php esc_html_e( 'Upgrade To Premium For Unloack More Features & Settings', 'modal-popup-box' ); ?></p>
+						<p class="ms-title"><?php esc_html_e( 'Upgrade To Premium For Unloack More Features & Settings', 'new-contact-form-widget' ); ?></p>
 					</div>
 
 					<div class="">
 						<h2><strong><?php esc_html_e( 'Offer:', 'new-contact-form-widget' ); ?></strong> <?php esc_html_e( 'Upgrade To Premium Just In Half Price ', 'new-contact-form-widget' ); ?><strike><?php esc_html_e( '$19.99', 'new-contact-form-widget' ); ?></strike> <strong><?php esc_html_e( '$ 12.99', 'new-contact-form-widget' ); ?></strong></h2>
 						<br>
 						<a href="https://awplife.com/wordpress-plugins/contact-form-wordpress-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Premium Version Details', 'new-contact-form-widget' ); ?></a>
-						<a href="https://awplife.com/demo/contact-form-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Check Live Demo', 'modal-popup-box' ); ?></a>
+						<a href="https://awplife.com/demo/contact-form-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Check Live Demo', 'new-contact-form-widget' ); ?></a>
 						<a href="https://awplife.com/demo/contact-form-premium/how-to-test-premium-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Try Pro Version', 'new-contact-form-widget' ); ?></a>
 					</div>
 
@@ -547,7 +548,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 						<h2><strong><?php esc_html_e( 'Offer:', 'new-contact-form-widget' ); ?></strong> <?php esc_html_e( 'Upgrade To Premium Just In Half Price ', 'new-contact-form-widget' ); ?><strike><?php esc_html_e( '$19.99', 'new-contact-form-widget' ); ?></strike> <strong><?php esc_html_e( '$ 12.99', 'new-contact-form-widget' ); ?></strong></h2>
 						<br>
 						<a href="https://awplife.com/wordpress-plugins/contact-form-wordpress-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Premium Version Details', 'new-contact-form-widget' ); ?></a>
-						<a href="https://awplife.com/demo/contact-form-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Check Live Demo', 'modal-popup-box' ); ?></a>
+						<a href="https://awplife.com/demo/contact-form-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Check Live Demo', 'new-contact-form-widget' ); ?></a>
 						<a href="https://awplife.com/demo/contact-form-premium/how-to-test-premium-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Try Pro Version', 'new-contact-form-widget' ); ?></a>
 					</div>
 
@@ -692,7 +693,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	<?php
 	// php save settings
 	if(isset($_POST['action'])) {
-		$cfw_nonce_value = $_POST['security'];
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'new-contact-form-widget' ) );
+		}
+		$cfw_nonce_value = isset($_POST['security']) ? sanitize_text_field($_POST['security']) : '';
 		if(wp_verify_nonce( $cfw_nonce_value, 'cfw_save_nonce' )) {
 			$action = $_POST['action'];
 			if($action == "cfw-save-setting") {
