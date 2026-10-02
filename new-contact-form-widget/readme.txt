@@ -1,164 +1,137 @@
-=== Contact Form Widget ===
+=== Contact Form Widget - Responsive Contact Form, Query Form & Form Builder ===
 Contributors: awordpresslife, razipathhan, hanif0991, muhammadshahid, fkfaisalkhan007, sharikkhan007, zishlife, FARAZFRANK
 Donate link: https://paypal.me/awplife
-Tags: contact form, form builder, contact widget, query form, email form
+Tags: contact form, query form, form builder, contact form widget, email form
 Requires at least: 4.0
-Tested up to: 6.9
-Stable tag: 1.5.2
+Tested up to: 7.0
+Stable tag: 1.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create contact forms with query table management. Simple setup, secure submissions, and easy customization for your site.
+Create responsive contact forms with stored query table management. Easy contact form shortcode and widget for inquiries and lead generation.
 
 == Description ==
 
-Contact Form Widget helps you add professional contact forms to your WordPress site without writing any code. It works as both a widget for sidebars and a shortcode for pages or posts.
+Contact Form Widget is a lightweight, responsive contact form plugin for WordPress designed to collect user inquiries, leads, and customer feedback effortlessly. Whether you need a simple sidebar contact form widget or a full-width contact form shortcode inside your posts and pages, this contact form plugin provides an intuitive setup with complete administrative control.
 
-**View Pro Demo:** **[Contact Form Premium Demo](https://awplife.com/demo/contact-form-premium/)**
-**More About Pro:** **[Contact Form Premium Details](https://awplife.com/wordpress-plugins/contact-form-premium/)**
-**Where To Buy:** **[Buy Premium Version](https://awplife.com/wordpress-plugins/contact-form-premium/)**
+Unlike basic contact form tools that rely solely on email notifications, every contact form submission sent through this plugin is saved directly to your WordPress database. You can manage, review, and organize all incoming messages inside a dedicated admin query dashboard, ensuring you never miss a visitor inquiry or client lead.
 
-What makes this different from other form solutions? Every form submission gets saved in your WordPress database. You can view, manage, and follow up on all queries from a dedicated Query Table in your admin dashboard. No more lost emails or missed inquiries.
+**View Pro Demo:** **[Contact Form Premium Demo](https://awplife.com/demo/contact-form-premium/)**  
+**More About Pro:** **[Contact Form Premium Details](https://awplife.com/wordpress-plugins/contact-form-wordpress-plugin/)**  
+**Try Pro Version:** **[Test Premium Plugin](https://awplife.com/demo/contact-form-premium/how-to-test-premium-plugin/)**
 
-= How It Works =
+= Why Choose This Contact Form Plugin? =
 
-1. Add the widget to any sidebar or use the shortcode `[contact-form-widget]` on any page
-2. Customize labels, colors, and styles from the settings panel
-3. Visitors submit their queries through the form
-4. You receive email notifications and can view all submissions in the Query Table
+Building a functional contact form should be straightforward. This plugin combines the simplicity of a drag-and-drop contact form widget with the flexibility of a shortcode-based form builder. It handles real-time AJAX form validation, protects submissions with security nonces, and offers custom design controls so your contact form matches your site branding seamlessly.
 
-= Who Is This For? =
+= Key Features of Contact Form Widget =
 
-This contact form solution works well for:
-
-* Business websites needing a simple inquiry form
-* Freelancers and agencies collecting project requests
-* Bloggers wanting to hear from readers
-* Service providers handling customer support queries
-* Portfolio sites with client contact needs
-
-= Free Features =
-
-* **Responsive Design** – Forms adapt to all screen sizes automatically
-* **Query Table Dashboard** – View and manage all form submissions in one place
-* **Shortcode Support** – Add forms anywhere with `[contact-form-widget]`
-* **Widget Ready** – Place contact forms in sidebars and widget areas
-* **Label Customization** – Change form field labels to match your needs
-* **Template Designs** – Choose from pre-built form styles
-* **PHP Email** – Receive notifications via standard PHP mail
-* **Secure Submissions** – Built-in security for safe form handling
+* **Stored Contact Queries** – Automatically saves every contact form message in your database table for easy tracking and record keeping.
+* **Dual Display Options** – Embed your contact form using the shortcode `[CFW]` or place it in any sidebar or footer widget area.
+* **Asynchronous AJAX Submission** – Visitors can submit the contact form instantly without page reloads, complete with loading spinners and inline confirmation notices.
+* **Pre-Built Layout Templates** – Select between Template 1 (classic centered layout) and Template 2 (modern two-column grid layout for Name and Email).
+* **Full Design Customization** – Adjust form background color, title color, max-width slider (10% to 100%), and container alignment (left, center, right).
+* **Custom Field Placeholders** – Customize text labels and placeholder prompts for Name, Email, Subject, and Message fields.
+* **Custom Error & Success Messages** – Tailor validation error alerts for blank inputs or invalid email addresses, as well as submission response messages.
+* **Custom CSS Editor** – Add your own custom CSS styling directly from the settings panel to tweak form appearances without editing theme files.
+* **CSV Export Tool** – Export all stored contact form queries into a structured CSV file for offline reporting and customer relationship management.
+* **Admin Query Dashboard** – Sort, paginate (5 to 250 records per page), view details in a popup modal, and delete single or bulk form entries.
 
 = Pro Features =
 
-Upgrade to Contact Form Premium for additional capabilities:
+Upgrade to Contact Form Premium for enhanced control and advanced form building capabilities:
 
-* **Google reCaptcha** – Block spam with reCaptcha verification
-* **SMTP Email Support** – Send emails through Gmail or custom SMTP servers
-* **Auto Email Responding** – Send automatic replies to form submitters
-* **Custom Email Messages** – Design personalized email templates
-* **Error Customization** – Set custom validation error messages
-* **Custom CSS** – Add your own styling with custom CSS field
-* **Multiple Color Schemes** – Choose from various color options
-* **Logo Customization** – Add and resize your logo on forms
-* **Statistical Dashboard** – View submission statistics and trends
-* **Download Reports** – Export query data as downloadable reports
-* **Daily Statistics** – Track daily submission reports
-* **Premium Support** – Get priority help from our team
-
-= SMTP Configuration =
-
-The premium version supports SMTP email delivery. Here is a quick video guide:
-
-[youtube https://www.youtube.com/watch?v=FZfneLNyE4o]
+* **Google reCAPTCHA Integration** – Block spam submissions and automated bots.
+* **SMTP Email Support** – Deliver notifications reliably via Gmail or custom SMTP servers.
+* **Auto Email Responder** – Send automatic reply emails to visitors after contact form submission.
+* **Custom Email Templates** – Personalize administrative and user notification emails.
+* **Submission Analytics** – View daily form submission trends and statistical reports.
+* **Priority Premium Support** – Access dedicated support from our technical team.
 
 == Installation ==
 
-1. Go to **Plugins > Add New** in your WordPress admin
-2. Search for "Contact Form Widget" or upload the plugin zip file
-3. Click **Install Now** and then **Activate**
-4. Navigate to **Appearance > Widgets** and drag the Contact Form Widget to your sidebar
-5. Or use the shortcode `[contact-form-widget]` in any page or post
-6. Configure your form settings and start receiving queries
-
-== Screenshots ==
-
-1. Contact form embedded via shortcode
-2. Contact form example design
-3. Contact form on a page
-4. Contact form styling options
-5. Contact form template example
-6. Form settings panel
-7. Query table in admin dashboard
+1. Log in to your WordPress admin dashboard.
+2. Go to **Plugins > Add New**.
+3. Search for **Contact Form Widget**.
+4. Click **Install Now** and then activate the plugin.
+5. To place the form in a widget area, go to **Appearance > Widgets** and drag **Contact Form Widget** to your desired sidebar.
+6. To embed the form on any page, post, or page builder section, paste the shortcode `[CFW]`.
+7. Go to **Contact Form Queries > Settings** to customize form templates, colors, text labels, and response messages.
 
 == Frequently Asked Questions ==
 
-= How do I add the contact form to my page? =
-Use the shortcode `[contact-form-widget]` in any page or post. You can also add it as a widget through Appearance > Widgets.
+= How do I display the contact form on a page or post? =
+Simply paste the shortcode `[CFW]` inside any page, post, or block editor section. You can also use page builders like Elementor, Beaver Builder, or Divi by adding the shortcode block.
 
-= Does this save form submissions in the database? =
-Yes, every submission is stored in a Query Table. You can view, sort, and manage all entries from your WordPress dashboard.
+= How do I add the contact form to my website sidebar or footer? =
+Go to **Appearance > Widgets** in your WordPress dashboard, find the **Contact Form Widget**, and drag it into your active sidebar or footer widget area.
 
-= Can I receive email notifications when someone submits the form? =
-Yes, you will receive an email notification for each form submission. The premium version also supports SMTP for reliable email delivery.
+= Are contact form submissions saved in WordPress? =
+Yes. All submissions sent through the contact form are stored in your WordPress database under the `{wp_prefix}awp_contact_form` table. You can view, search, and manage all entries from **Contact Form Queries** in your admin panel.
 
-= Do I need coding knowledge to customize the form? =
-No coding is required. You can change labels, colors, and styles directly from the settings panel.
+= Can I export contact form entries to Excel or CSV? =
+Yes. On the **Contact Form Queries > All Users Queries** page, click the **Download Query List** button to download a complete CSV report containing submitter names, email addresses, subjects, messages, and timestamps.
 
-= Is the form mobile responsive? =
-Yes, the contact form automatically adjusts to look good on phones, tablets, and desktop screens.
+= Can I customize the colors and width of the contact form? =
+Yes. Under **Contact Form Queries > Settings**, you can choose your title color, form background color, container width percentage, and overall form alignment (left, center, or right).
 
-= Can I use SMTP for sending emails? =
-SMTP support is available in the premium version. It supports Gmail and other SMTP providers for reliable email delivery.
+= Is the contact form mobile responsive? =
+Yes. Both form templates adapt automatically to screen sizes on mobile phones, tablets, laptops, and desktop computers.
 
-= How do I protect the form from spam? =
-The premium version includes Google reCaptcha integration to prevent spam submissions.
+= Does the contact form use AJAX for submission? =
+Yes. Submissions are processed asynchronously in the background without refreshing the web page.
 
-= Can I export form submissions? =
-The premium version allows you to download query reports for record keeping or follow-up.
+= Can I change the field placeholders and error messages? =
+Yes. You can edit the placeholder text for Name, Email, Subject, and Message, as well as all validation error messages and confirmation notices directly from the plugin settings panel.
 
-= Does it work with page builders? =
-Yes, you can use the shortcode in any page builder including Elementor, Gutenberg, and others.
+== Screenshots ==
 
-= Can I have multiple forms on my site? =
-The widget can be added to multiple sidebar areas. For multiple shortcode forms, the premium version offers more flexibility.
-
-= How secure is the form submission? =
-The form uses secure submission methods and sanitizes all input data to protect your site.
-
-= Will this slow down my website? =
-No, the plugin is lightweight and loads only necessary assets on pages where the form appears.
+1. Contact form displayed on site frontend using shortcode [CFW]
+2. Contact form layout template selection and design options
+3. Form header and color customization settings panel
+4. Form label and custom placeholder text settings
+5. Custom validation error message configuration
+6. All user contact queries database table in WordPress admin
+7. Viewing detailed user query in administrative popup modal
 
 == Changelog ==
 
+= 1.5.3 =
+* Security: Neutralized CSV formula injection risks during export and added UTF-8 BOM encoding.
+* Security: Implemented hidden anti-spam honeypot verification for form submissions.
+* Security: Secured dashboard cache refresh with strict capability checks and nonce verification.
+* Performance: Optimized queries dashboard pagination using COUNT(*) for minimal memory consumption.
+* Performance: Replaced iterative database deletions with a single bulk query.
+* Performance: Added index on query timestamps and upgraded table ID schema to bigint unsigned.
+* Feature: Added automatic admin email notifications with Reply-To headers upon form submission.
+* Feature: Added dedicated AJAX handler and user feedback banner for settings configuration.
+* Fix: Isolated form styling strictly under `.cfw-container` to prevent bleed into theme styles and buttons.
+* Fix: Refactored AJAX script to support multiple contact forms on the same page.
+* Fix: Corrected query submission timestamp formatting to standard 24-hour MySQL datetime.
+* Fix: Fixed background color application on sidebar widget displays.
+* Compatibility: Added transient caching to theme recommendations dashboard.
+* Compatibility: Standardized permissions check to manage_options.
+* Compatibility: Full PHP 8.2+ compatibility with safe null coalescing defaults across all options.
+
 = 1.5.2 =
-* Fixed "View Query" modal popup functionality
-* Hardened security with proper nonce verification and capability checks
-* Optimized "Download Query List" to prevent header errors
-* Improved asset loading for better compatibility
+* Fixed View Query modal popup rendering in admin dashboard.
+* Hardened security with enhanced nonce verification and capability checks.
+* Optimized CSV query list download handling to prevent header errors.
+* Refactored script enqueuing for improved compatibility.
 
 = 1.5.1 =
-* Tested with WordPress 6.9
+* Tested and confirmed compatibility with WordPress 6.9.
 
 = 1.5.0 =
-* Fixed download list button issue
-* Tested with WordPress 6.8.3
+* Resolved CSV download button issue and updated administrative scripts.
 
 = 1.4.9 =
-* Tested with WordPress 6.8.2
-
-= 1.4.8 =
-* Tested with WordPress 6.8.1
-* Readme updates
-* Security improvements
-
-= 1.4.7 =
-* Tested with WordPress 6.8.0
-* Security fix for download query list
-
-= 1.4.6 =
-* Tested with WordPress 6.7.2
+* Maintenance update and code optimizations.
 
 == Upgrade Notice ==
 
-= 1.5.1 =
-Compatibility update for WordPress 6.9. Recommended for all users.
+= 1.5.3 =
+Major release featuring security hardening (anti-spam honeypot, CSV sanitization), admin email notifications, scoped CSS isolation, query database performance optimizations, and full PHP 8.x compatibility.
+
+= 1.5.2 =
+Recommended update for enhanced administrative security, modal script fixes, and seamless CSV query exports.

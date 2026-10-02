@@ -1,149 +1,37 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-	//toogle-button
-	wp_enqueue_style('awl-cfw-button-css', plugin_dir_url( __FILE__ ).'css/toogle-button.css');
-	wp_enqueue_style( 'cfw-bootstrap-css', plugin_dir_url( __FILE__ ).'css/cfw-bootstrap.css' );
-	wp_enqueue_style( 'cfw-font-awesome-css', plugin_dir_url( __FILE__ ).'css/font-awesome.min.css' );
-	wp_enqueue_style( 'cfw-metabox-css', plugin_dir_url( __FILE__ ).'css/metabox.css' );
-	wp_enqueue_script( 'cfw-boostrap-js', plugin_dir_url( __FILE__ ).'js/bootstrap.js', array('jquery'), '3.3.6', true );
-	wp_enqueue_style( 'wp-color-picker' ); 
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
-	// js
-	wp_enqueue_script('jquery');
-	wp_enqueue_script( 'cfw-color-picker-js',  plugin_dir_url( __FILE__ ).'js/cfw-color-picker.js', array( 'jquery', 'wp-color-picker' ), '', true  );
-	wp_enqueue_script( 'jquery-ui-sortable' );		
-	wp_localize_script( 'cfw-ajax', 'cfw_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-	
-	// load saved setting from option table
-	$all_setttings = get_option('contact_form_settings');
-	
-		if(isset($all_setttings)){
-		// Design Setting	
-		if($all_setttings['contact_form_template']) 
-			$contact_form_template = $all_setttings['contact_form_template'];
-		else 
-			$contact_form_template = "template1";
-		
-		if($all_setttings['title_field']) 
-			$title_field = $all_setttings['title_field'];
-		else 
-			$title_field = "Contact Form";
-		
-		if($all_setttings['title_color']) 
-			$title_color = $all_setttings['title_color'];
-		else 
-			$title_color = "#000000";
-		
-		$contact_form_width = isset($all_setttings['contact_form_width']) ? $all_setttings['contact_form_width'] : "35";
-		
-		$cfw_form_order = isset($all_setttings['cfw_form_order']) ? $all_setttings['cfw_form_order'] : "center";
-		$bg_color = isset($all_setttings['bg_color']) ? $all_setttings['bg_color'] : "#FFFFFF";
+if ( ! current_user_can( 'manage_options' ) ) {
+	return;
+}
 
-		if($all_setttings['description_field']) 
-			$description_field = $all_setttings['description_field'];
-		else 
-			$description_field = "Please fill below form if you have any query with us.";
-		
-		if($all_setttings['name_field']) 
-			$name_field = $all_setttings['name_field'];
-		else 
-			$name_field = "Type Your Name Here";
-		
-		if($all_setttings['email_field']) 
-			$email_field = $all_setttings['email_field'];
-		else 
-			$email_field = "Type Your Email Here";
-		
-		if($all_setttings['subject_field']) 
-			$subject_field = $all_setttings['subject_field'];
-		else 
-			$subject_field = "Type Your Query Subject Here";
-		
-		if($all_setttings['message_field']) 
-			$message_field = $all_setttings['message_field'];
-		else 
-			$message_field = "Type Your Query Message Here";
-	
-	
-		if($all_setttings['name_error_field']) 
-			$name_error_field = $all_setttings['name_error_field'];
-		else 
-			$name_error_field = "Name cannot be blank.";
-	
-		if($all_setttings['email_error_field']) 
-				$email_error_field = $all_setttings['email_error_field'];
-			else 
-				$email_error_field = "Email cannot be blank.";
-		
-		if($all_setttings['email_error_field_2']) 
-				$email_error_field_2 = $all_setttings['email_error_field_2'];
-			else 
-				$email_error_field_2 = "Email is invalid.";
-		
-		if($all_setttings['subject_error_field']) 
-				$subject_error_field = $all_setttings['subject_error_field'];
-			else 
-				$subject_error_field = "Subject cannot be blank.";
-		
-		if($all_setttings['message_error_field']) 
-				$message_error_field = $all_setttings['message_error_field'];
-			else 
-				$message_error_field = "Message cannot be blank.";
+// Load saved settings from options table with safe PHP 8 fallbacks
+$all_setttings = get_option('contact_form_settings');
+if ( ! is_array( $all_setttings ) ) {
+	$all_setttings = array();
+}
 
-		if($all_setttings['show_query']) 
-			$show_query = $all_setttings['show_query'];
-		else 
-			$show_query = 10;
-
-		if($all_setttings['sb_button_text']) 
-			$sb_button_text = $all_setttings['sb_button_text'];
-		else 
-			$sb_button_text = "Submit";
-		
-		if($all_setttings['cus_css']) 
-			$cus_css = $all_setttings['cus_css'];
-		else 
-			$cus_css = "";
-	
-		// Message Setting
-		if($all_setttings['qsm']) 
-			$qsm = $all_setttings['qsm'];
-		else 
-			$qsm = "Thank you for submitting query. We will be back to you shortly.";
-		
-		if($all_setttings['qfm'])
-			$qfm = $all_setttings['qfm'];
-		else
-			$qfm = "Sorry! contact from not working properly. Please directly contact to site admin using this email: ".get_option( 'admin_email' );
-		
-	} else {
-		
-		$contact_form_template = "template1";
-		$title_field = "Contact Form";
-		$title_color = "#FAFAFA";
-		$bg_color = "#ffffff";
-		$contact_form_width = 35;
-		$cfw_form_order = "center";
-		$description_field = "Please fill below form if you have any query with us.";
-		$name_field = "Type Your Name Here";
-		$email_field = "Type Your Email Here";
-		$subject_field = "Type Your Query Subject Here";
-		$message_field = "Type Your Query Message Here";
-		$name_error_field = "Name cannot be blank.";
-		$email_error_field = "Email cannot be blank.";
-		$email_error_field_2 = "Email is invalid.";
-		$subject_error_field = "Subject cannot be blank.";
-		$message_error_field = "Message cannot be blank.";
-		$show_query = 10;
-		$sb_button_text = "Submit";
-		$cus_css= "";
-		
-		$qsm = "Thank you for submitting query. We will be back to you shortly.";
-		$qfm = "Sorry! contact from not working properly. Please directly contact to site admin using this email: ".get_option( 'admin_email' );
-	}
-	?>
+$contact_form_template = ! empty( $all_setttings['contact_form_template'] ) ? $all_setttings['contact_form_template'] : "template1";
+$title_field           = ! empty( $all_setttings['title_field'] ) ? $all_setttings['title_field'] : "Contact Form";
+$title_color           = ! empty( $all_setttings['title_color'] ) ? $all_setttings['title_color'] : "#000000";
+$contact_form_width    = ! empty( $all_setttings['contact_form_width'] ) ? $all_setttings['contact_form_width'] : "35";
+$cfw_form_order        = ! empty( $all_setttings['cfw_form_order'] ) ? $all_setttings['cfw_form_order'] : "center";
+$bg_color              = ! empty( $all_setttings['bg_color'] ) ? $all_setttings['bg_color'] : "#FFFFFF";
+$description_field     = ! empty( $all_setttings['description_field'] ) ? $all_setttings['description_field'] : "Please fill below form if you have any query with us.";
+$name_field            = ! empty( $all_setttings['name_field'] ) ? $all_setttings['name_field'] : "Type Your Name Here";
+$email_field           = ! empty( $all_setttings['email_field'] ) ? $all_setttings['email_field'] : "Type Your Email Here";
+$subject_field         = ! empty( $all_setttings['subject_field'] ) ? $all_setttings['subject_field'] : "Type Your Query Subject Here";
+$message_field         = ! empty( $all_setttings['message_field'] ) ? $all_setttings['message_field'] : "Type Your Query Message Here";
+$name_error_field      = ! empty( $all_setttings['name_error_field'] ) ? $all_setttings['name_error_field'] : "Name cannot be blank.";
+$email_error_field     = ! empty( $all_setttings['email_error_field'] ) ? $all_setttings['email_error_field'] : "Email cannot be blank.";
+$email_error_field_2   = ! empty( $all_setttings['email_error_field_2'] ) ? $all_setttings['email_error_field_2'] : "Email is invalid.";
+$subject_error_field   = ! empty( $all_setttings['subject_error_field'] ) ? $all_setttings['subject_error_field'] : "Subject cannot be blank.";
+$message_error_field   = ! empty( $all_setttings['message_error_field'] ) ? $all_setttings['message_error_field'] : "Message cannot be blank.";
+$show_query            = ! empty( $all_setttings['show_query'] ) ? $all_setttings['show_query'] : 10;
+$sb_button_text        = ! empty( $all_setttings['sb_button_text'] ) ? $all_setttings['sb_button_text'] : "Submit";
+$cus_css               = ! empty( $all_setttings['cus_css'] ) ? $all_setttings['cus_css'] : "";
+$qsm                   = ! empty( $all_setttings['qsm'] ) ? $all_setttings['qsm'] : "Thank you for submitting query. We will be back to you shortly.";
+$qfm                   = ! empty( $all_setttings['qfm'] ) ? $all_setttings['qfm'] : "Sorry! contact from not working properly. Please directly contact site admin using this email: " . get_option( 'admin_email' );
+?>
 	
 	<div style="text-align:center">
 		<h1><?php esc_html_e( 'How to show Contact Form on page ?', 'new-contact-form-widget' ); ?></h1>
@@ -504,14 +392,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					</div>
 				</div>
 				<div class="bhoechie-tab-content">
-					<h2><?php esc_html_e( 'Upgrade To Pro', 'new-contact-form-widget' ); ?></h2>
+					<h2><?php esc_html_e( 'Auto Responder Setting (Pro Feature)', 'new-contact-form-widget' ); ?></h2>
 					<hr>
-					<!--Grid-->
-					<div class="" style="padding-left: 10px;">
-						<p class="ms-title"><?php esc_html_e( 'Upgrade To Premium For Unloack More Features & Settings', 'new-contact-form-widget' ); ?></p>
+					<div style="padding-left: 10px;">
+						<p class="ms-title"><?php esc_html_e( 'Automatically send customized confirmation emails to visitors when they submit an inquiry.', 'new-contact-form-widget' ); ?></p>
 					</div>
 
-					<div class="">
+					<div>
 						<h2><strong><?php esc_html_e( 'Offer:', 'new-contact-form-widget' ); ?></strong> <?php esc_html_e( 'Upgrade To Premium Just In Half Price ', 'new-contact-form-widget' ); ?><strike><?php esc_html_e( '$19.99', 'new-contact-form-widget' ); ?></strike> <strong><?php esc_html_e( '$ 12.99', 'new-contact-form-widget' ); ?></strong></h2>
 						<br>
 						<a href="https://awplife.com/wordpress-plugins/contact-form-wordpress-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Premium Version Details', 'new-contact-form-widget' ); ?></a>
@@ -520,38 +407,34 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					</div>
 				</div>
 				<div class="bhoechie-tab-content">
-					<h2><?php esc_html_e( 'Upgrade To Pro', 'new-contact-form-widget' ); ?></h2>
+					<h2><?php esc_html_e( 'SMTP & Custom Email Setting (Pro Feature)', 'new-contact-form-widget' ); ?></h2>
 					<hr>
-					<!--Grid-->
-					<div class="" style="padding-left: 10px;">
-						<p class="ms-title"><?php esc_html_e( 'Upgrade To Premium For Unloack More Features & Settings', 'new-contact-form-widget' ); ?></p>
+					<div style="padding-left: 10px;">
+						<p class="ms-title"><?php esc_html_e( 'Deliver notifications reliably via custom SMTP servers and design personalized HTML email templates.', 'new-contact-form-widget' ); ?></p>
 					</div>
 
-					<div class="">
+					<div>
 						<h2><strong><?php esc_html_e( 'Offer:', 'new-contact-form-widget' ); ?></strong> <?php esc_html_e( 'Upgrade To Premium Just In Half Price ', 'new-contact-form-widget' ); ?><strike><?php esc_html_e( '$19.99', 'new-contact-form-widget' ); ?></strike> <strong><?php esc_html_e( '$ 12.99', 'new-contact-form-widget' ); ?></strong></h2>
 						<br>
 						<a href="https://awplife.com/wordpress-plugins/contact-form-wordpress-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Premium Version Details', 'new-contact-form-widget' ); ?></a>
 						<a href="https://awplife.com/demo/contact-form-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Check Live Demo', 'new-contact-form-widget' ); ?></a>
 						<a href="https://awplife.com/demo/contact-form-premium/how-to-test-premium-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Try Pro Version', 'new-contact-form-widget' ); ?></a>
 					</div>
-
 				</div>
 				<div class="bhoechie-tab-content">
-					<h2><?php esc_html_e( 'Upgrade To Pro', 'new-contact-form-widget' ); ?></h2>
+					<h2><?php esc_html_e( 'Google reCAPTCHA v2 / v3 (Pro Feature)', 'new-contact-form-widget' ); ?></h2>
 					<hr>
-					<!--Grid-->
-					<div class="" style="padding-left: 10px;">
-						<p class="ms-title"><?php esc_html_e( 'Upgrade To Premium For Unloack More Features & Settings', 'new-contact-form-widget' ); ?></p>
+					<div style="padding-left: 10px;">
+						<p class="ms-title"><?php esc_html_e( 'Block automated spambots and abuse with built-in Google reCAPTCHA integration.', 'new-contact-form-widget' ); ?></p>
 					</div>
 
-					<div class="">
+					<div>
 						<h2><strong><?php esc_html_e( 'Offer:', 'new-contact-form-widget' ); ?></strong> <?php esc_html_e( 'Upgrade To Premium Just In Half Price ', 'new-contact-form-widget' ); ?><strike><?php esc_html_e( '$19.99', 'new-contact-form-widget' ); ?></strike> <strong><?php esc_html_e( '$ 12.99', 'new-contact-form-widget' ); ?></strong></h2>
 						<br>
 						<a href="https://awplife.com/wordpress-plugins/contact-form-wordpress-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Premium Version Details', 'new-contact-form-widget' ); ?></a>
 						<a href="https://awplife.com/demo/contact-form-premium/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Check Live Demo', 'new-contact-form-widget' ); ?></a>
 						<a href="https://awplife.com/demo/contact-form-premium/how-to-test-premium-plugin/" target="_blank" class="button button-primary button-hero load-customize hide-if-no-customize"><?php esc_html_e( 'Try Pro Version', 'new-contact-form-widget' ); ?></a>
 					</div>
-
 				</div>
 			</div>
 		</div>		
@@ -559,6 +442,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		<div id="loading-msg" class="alert alert-warning" style="display:none; text-align: center"> 
 			<i class='fa fa-cog fa-spin fa-5x fa-fw margin-bottom'></i>
 			<p><?php esc_html_e('Saving setting is under processing...', 'new-contact-form-widget'); ?></p>
+		</div>
+
+		<div id="success-msg" class="alert alert-success" style="display:none; text-align: center; margin-top: 15px;"> 
+			<i class='fa fa-check-circle fa-2x' style="vertical-align: middle; margin-right: 8px;"></i>
+			<strong><?php esc_html_e('Settings saved successfully!', 'new-contact-form-widget'); ?></strong>
 		</div>
 		
 		<div class="p-4" style="text-align:center">
@@ -570,65 +458,37 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 	function SaveSettings() {		
 		jQuery(".error").hide();
-		var action = 'cfw-save-setting';
-		var qsm = jQuery("#qsm").val();
-		var qfm = jQuery("#qfm").val();
-		
-		var contact_form_template = jQuery('input[name=contact_form_template]:checked', '#cfw-settings-form').val()
-		var title_field = jQuery("#title_field").val();
-		var title_color = jQuery("#title_color").val();
-		var bg_color = jQuery("#bg_color").val();
-		var contact_form_width = jQuery("#contact_form_width").val();
-		var cfw_form_order = jQuery('input[name=cfw_form_order]:checked', '#cfw-settings-form').val();
-		var description_field = jQuery("#description_field").val();	
-		var name_field = jQuery("#name_field").val();
-		var email_field = jQuery("#email_field").val();
-		var subject_field = jQuery("#subject_field").val();
-		var message_field = jQuery("#message_field").val();
-		var name_error_field = jQuery("#name_error_field").val();
-		var email_error_field = jQuery("#email_error_field").val();
-		var email_error_field_2 = jQuery("#email_error_field_2").val();
-		var subject_error_field = jQuery("#subject_error_field").val();
-		var message_error_field = jQuery("#message_error_field").val();
-		var sb_button_text = jQuery("#sb_button_text").val();
-		var show_query = jQuery("#show_query").val();
-		var cus_css = jQuery("#cus_css").val();
-		
-	
-		var CFWAjax = new XMLHttpRequest();
-		
-		// hide saving button
-		jQuery("#cfw-save-settings").hide();
+		var $btn = jQuery("#cfw-save-settings");
+		var $loading = jQuery("#loading-msg");
+		var $success = jQuery("#success-msg");
 
-		//show loading icon
-		jQuery("#loading-msg").show();
-	
-		//check object request
-		CFWAjax.onreadystatechange = function() {
-			jQuery("#loading-msg").show();
-			
-			if (CFWAjax.readyState == 4 && CFWAjax.status == 200) {
-				if(CFWAjax.responseText.indexOf("setting-successfully-saved") > 0) {
-					//hide loading icon
-					jQuery("#loading-msg").hide();
-					
-					// show saving button
-					jQuery("#cfw-save-settings").show();
-					
-					//show setting saved successfully message
-					jQuery("#success-msg").show();
-					jQuery("#success-msg").fadeOut(3000);
-				}
-			}
-			
-			if(CFWAjax.status == 404) {
-				alert('File not found & Object not responding.');
-				return false;
-			}
+		$btn.hide();
+		$loading.show();
+		$success.hide();
+
+		var formData = jQuery("#cfw-settings-form").serializeArray();
+		var postData = {
+			action: 'cfw_save_settings',
+			security: '<?php echo esc_js( wp_create_nonce( "cfw_save_nonce" ) ); ?>'
 		};
-		CFWAjax.open("POST", location.href, true);
-		CFWAjax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		CFWAjax.send('action=' + action + '&security=' + '<?php echo esc_js(wp_create_nonce( "cfw_save_nonce" )); ?>' + '&qsm=' + qsm + '&qfm=' + qfm + '&contact_form_template=' + contact_form_template + '&title_field=' + title_field  +  '&name_error_field=' + name_error_field  +  '&email_error_field=' + email_error_field +  '&email_error_field_2=' + email_error_field_2  + '&subject_error_field=' + subject_error_field  +  '&message_error_field=' + message_error_field  +  '&title_color=' + title_color + '&bg_color=' + bg_color + '&contact_form_width=' + contact_form_width + '&cfw_form_order=' + cfw_form_order + '&description_field=' + description_field  + '&name_field=' + name_field + '&email_field=' + email_field + '&subject_field=' + subject_field + '&message_field=' + message_field + '&sb_button_text=' + sb_button_text  + '&show_query=' + show_query +  '&cus_css=' + cus_css );
+
+		jQuery.each(formData, function(i, field) {
+			postData[field.name] = field.value;
+		});
+
+		jQuery.post(ajaxurl, postData, function(response) {
+			$loading.hide();
+			$btn.show();
+			if (response && response.success) {
+				$success.fadeIn().delay(3000).fadeOut();
+			} else {
+				alert((response && response.data && response.data.message) ? response.data.message : 'Error saving settings.');
+			}
+		}).fail(function() {
+			$loading.hide();
+			$btn.show();
+			alert('Error saving settings. Server request failed.');
+		});
 	}
 	
 	//color-picker
@@ -690,67 +550,4 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	});
 	
 	</script>
-	<?php
-	// php save settings
-	if(isset($_POST['action'])) {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'new-contact-form-widget' ) );
-		}
-		$cfw_nonce_value = isset($_POST['security']) ? sanitize_text_field($_POST['security']) : '';
-		if(wp_verify_nonce( $cfw_nonce_value, 'cfw_save_nonce' )) {
-			$action = $_POST['action'];
-			if($action == "cfw-save-setting") {
-				$qsm = sanitize_text_field($_POST['qsm']);
-				$qfm = sanitize_text_field($_POST['qfm']);	
-				$title_field = sanitize_text_field ($_POST['title_field']);
-				$contact_form_template = sanitize_text_field ($_POST['contact_form_template']);
-				$title_color = sanitize_text_field($_POST['title_color']);
-				$bg_color = sanitize_text_field($_POST['bg_color']);
-				$contact_form_width = sanitize_text_field($_POST['contact_form_width']);
-				$cfw_form_order = sanitize_text_field($_POST['cfw_form_order']);
-				$description_field = sanitize_text_field($_POST['description_field']);
-				$name_field = sanitize_text_field ($_POST['name_field']);
-				$email_field = sanitize_text_field ($_POST['email_field']);
-				$subject_field = sanitize_text_field ($_POST['subject_field']);
-				$message_field = sanitize_text_field ($_POST['message_field']);
-				$name_error_field = sanitize_text_field ($_POST['name_error_field']);
-				$email_error_field = sanitize_text_field ($_POST['email_error_field']);
-				$email_error_field_2 = sanitize_text_field( $_POST['email_error_field_2']);
-				$subject_error_field = sanitize_text_field ($_POST['subject_error_field']);
-				$message_error_field = sanitize_text_field ($_POST['message_error_field']);
-				$sb_button_text = sanitize_text_field ($_POST['sb_button_text']);
-				$show_query = sanitize_text_field($_POST['show_query']);
-				$cus_css = sanitize_text_field($_POST['cus_css']);			
-				
-				$all_settings = array(
-					'qsm' => $qsm,
-					'qfm' => $qfm,
-					//Design settings
-					'title_field' => $title_field,
-					'contact_form_template' => $contact_form_template,
-					'title_color' => $title_color,	
-					'bg_color' => $bg_color,	
-					'contact_form_width' => $contact_form_width,	
-					'cfw_form_order' => $cfw_form_order,	
-					'description_field' => $description_field,
-					'name_field' => $name_field,
-					'email_field' => $email_field,
-					'subject_field' => $subject_field,
-					'message_field' => $message_field,
-					'name_error_field' => $name_error_field,
-					'email_error_field' => $email_error_field,
-					'email_error_field_2' => $email_error_field_2,
-					'subject_error_field' => $subject_error_field,
-					'message_error_field' => $message_error_field,
-					'sb_button_text' => $sb_button_text,
-					'show_query' => $show_query,
-					'cus_css' => $cus_css,
-				);
-				
-				if(update_option('contact_form_settings', $all_settings)) {
-					echo "<p id='setting-saved'>setting-successfully-saved</p>";
-				}
-			}
-		} // end of nonce check
-	} // end if isset
-?>
+<?php

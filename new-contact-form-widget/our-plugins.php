@@ -13,7 +13,9 @@ $transient_key = 'ig_our_plugins_data';
 
 // Force refresh the data to apply new categorization rules
 if ( isset($_GET['refresh_plugins']) ) {
-    delete_transient( $transient_key );
+    if ( current_user_can( 'manage_options' ) && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'cfw_refresh_plugins_nonce' ) ) {
+        delete_transient( $transient_key );
+    }
 }
 
 $plugins = get_transient( $transient_key );
@@ -191,27 +193,27 @@ usort( $filtered_plugins, function ( $a, $b ) {
 <div class="wrap ig-our-plugins-wrap">
     <header class="ig-our-plugins-header">
         <div class="ig-header-content">
-            <h1><?php esc_html_e( 'Our WordPress Ecosystem', 'new-image-gallery' ); ?></h1>
-            <p><?php esc_html_e( 'Discover powerful tools designed to simplify your WordPress workflow. High-performance plugins built by A WP Life.', 'new-image-gallery' ); ?></p>
+            <h1><?php esc_html_e( 'Our WordPress Ecosystem', 'new-contact-form-widget' ); ?></h1>
+            <p><?php esc_html_e( 'Discover powerful tools designed to simplify your WordPress workflow. High-performance plugins built by A WP Life.', 'new-contact-form-widget' ); ?></p>
         </div>
         <div class="ig-header-stats">
             <div class="ig-stat-item">
                 <span class="ig-stat-value">500k+</span>
-                <span class="ig-stat-label"><?php esc_html_e( 'Active Installs', 'new-image-gallery' ); ?></span>
+                <span class="ig-stat-label"><?php esc_html_e( 'Active Installs', 'new-contact-form-widget' ); ?></span>
             </div>
         </div>
     </header>
 
     <!-- Category Filters -->
     <nav class="ig-plugins-filters">
-        <button class="ig-filter-btn active" data-filter="all"><?php esc_html_e( 'All Plugins', 'new-image-gallery' ); ?></button>
-        <button class="ig-filter-btn" data-filter="new"><?php esc_html_e( 'New Releases', 'new-image-gallery' ); ?></button>
-        <button class="ig-filter-btn" data-filter="popular"><?php esc_html_e( 'Most Popular', 'new-image-gallery' ); ?></button>
-        <button class="ig-filter-btn" data-filter="marketing"><?php esc_html_e( 'Marketing & Growth', 'new-image-gallery' ); ?></button>
-        <button class="ig-filter-btn" data-filter="social"><?php esc_html_e( 'Social Media', 'new-image-gallery' ); ?></button>
-        <button class="ig-filter-btn" data-filter="technical"><?php esc_html_e( 'Technical Tools', 'new-image-gallery' ); ?></button>
+        <button class="ig-filter-btn active" data-filter="all"><?php esc_html_e( 'All Plugins', 'new-contact-form-widget' ); ?></button>
+        <button class="ig-filter-btn" data-filter="new"><?php esc_html_e( 'New Releases', 'new-contact-form-widget' ); ?></button>
+        <button class="ig-filter-btn" data-filter="popular"><?php esc_html_e( 'Most Popular', 'new-contact-form-widget' ); ?></button>
+        <button class="ig-filter-btn" data-filter="marketing"><?php esc_html_e( 'Marketing & Growth', 'new-contact-form-widget' ); ?></button>
+        <button class="ig-filter-btn" data-filter="social"><?php esc_html_e( 'Social Media', 'new-contact-form-widget' ); ?></button>
+        <button class="ig-filter-btn" data-filter="technical"><?php esc_html_e( 'Technical Tools', 'new-contact-form-widget' ); ?></button>
         
-        <a href="<?php echo esc_url( add_query_arg( 'refresh_plugins', '1' ) ); ?>" class="ig-refresh-link" title="<?php esc_attr_e( 'Sync with WordPress.org', 'new-image-gallery' ); ?>">
+        <a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'refresh_plugins', '1' ), 'cfw_refresh_plugins_nonce' ) ); ?>" class="ig-refresh-link" title="<?php esc_attr_e( 'Sync with WordPress.org', 'new-contact-form-widget' ); ?>">
             <span class="dashicons dashicons-update"></span>
         </a>
     </nav>
@@ -219,10 +221,10 @@ usort( $filtered_plugins, function ( $a, $b ) {
 	<?php if ( empty( $filtered_plugins ) ) : ?>
         <div class="ig-error-wrap">
             <span class="dashicons dashicons-warning"></span>
-            <h2><?php esc_html_e( 'Unable to fetch our plugins', 'new-image-gallery' ); ?></h2>
-            <p><?php esc_html_e( 'We encountered an error connecting to WordPress.org. Please try again later.', 'new-image-gallery' ); ?></p>
+            <h2><?php esc_html_e( 'Unable to fetch our plugins', 'new-contact-form-widget' ); ?></h2>
+            <p><?php esc_html_e( 'We encountered an error connecting to WordPress.org. Please try again later.', 'new-contact-form-widget' ); ?></p>
             <a href="<?php echo esc_url( 'https://profiles.wordpress.org/awordpresslife/#content-plugins' ); ?>" target="_blank" class="ig-btn ig-btn-primary" style="margin-top: 20px;">
-				<?php esc_html_e( 'Visit Our WordPress Profile', 'new-image-gallery' ); ?>
+				<?php esc_html_e( 'Visit Our WordPress Profile', 'new-contact-form-widget' ); ?>
             </a>
         </div>
 	<?php else : ?>
@@ -252,7 +254,7 @@ usort( $filtered_plugins, function ( $a, $b ) {
 				?>
                 <div class="ig-plugin-card <?php echo esc_attr( $cat_classes ); ?>">
 					<?php if ( $is_installed ) : ?>
-                        <div class="ig-plugin-status"><?php esc_html_e( 'INSTALLED', 'new-image-gallery' ); ?></div>
+                        <div class="ig-plugin-status"><?php esc_html_e( 'INSTALLED', 'new-contact-form-widget' ); ?></div>
 					<?php endif; ?>
 
                     <div class="ig-plugin-banner">
@@ -272,16 +274,16 @@ usort( $filtered_plugins, function ( $a, $b ) {
                             </div>
                             <div class="ig-plugin-meta-item">
                                 <span class="dashicons dashicons-download"></span>
-								<?php echo esc_html( $install_count ); ?> <?php esc_html_e( 'Installs', 'new-image-gallery' ); ?>
+								<?php echo esc_html( $install_count ); ?> <?php esc_html_e( 'Installs', 'new-contact-form-widget' ); ?>
                             </div>
                         </div>
 
                         <div class="ig-plugin-actions">
                             <a href="<?php echo esc_url( 'https://wordpress.org/plugins/' . $plugin['slug'] . '/' ); ?>" target="_blank" class="ig-btn ig-btn-secondary">
-								<?php esc_html_e( 'Details', 'new-image-gallery' ); ?>
+								<?php esc_html_e( 'Details', 'new-contact-form-widget' ); ?>
                             </a>
                             <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=' . $plugin['slug'] . '&TB_iframe=true&width=772&height=550' ) ); ?>" class="ig-btn ig-btn-primary thickbox">
-								<?php esc_html_e( 'Install Now', 'new-image-gallery' ); ?>
+								<?php esc_html_e( 'Install Now', 'new-contact-form-widget' ); ?>
                             </a>
                         </div>
                     </div>

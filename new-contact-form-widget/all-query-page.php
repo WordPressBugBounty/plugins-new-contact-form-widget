@@ -1,12 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// load css and js files
-wp_enqueue_style( 'cfw-bootstrap-css', plugin_dir_url( __FILE__ ).'css/bootstrap.css' );
-wp_enqueue_style( 'cfw-font-awesome-css', plugin_dir_url( __FILE__ ).'css/font-awesome.min.css' );
-wp_enqueue_style( 'cfw-metabox-css', plugin_dir_url( __FILE__ ).'css/metabox.css' );
-wp_enqueue_script( 'cfw-boostrap-js', plugin_dir_url( __FILE__ ).'js/bootstrap.js', array('jquery'), '3.3.6', true );
-
 // action request handler
 $action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : '');
 
@@ -64,25 +58,19 @@ if(!empty($action)) {
 			}
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'awp_contact_form';
-			$ids_string = isset($_POST['id']) ? $_POST['id'] : '';
-			$ids = explode(",", $ids_string);
+			$ids_string = isset($_POST['id']) ? sanitize_text_field( wp_unslash( $_POST['id'] ) ) : '';
+			$ids = array_filter( array_map( 'absint', explode( ",", $ids_string ) ) );
 
-			$count = count($ids);
-			$n = 0;
-
-			if (is_array($ids)) {
-				foreach ($ids as $id) {
-					$id = (int)$id;
-					if ($id > 0 && $wpdb->delete($table_name, array('id' => $id), array('%d'))) {
-						$n++;
-					}
-				}
-
-				if ($n == $count) {
+			if ( ! empty( $ids ) ) {
+				$placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+				$deleted = $wpdb->query( $wpdb->prepare( "DELETE FROM `$table_name` WHERE id IN ($placeholders)", $ids ) );
+				if ( false !== $deleted ) {
 					echo "success-bulk-delete";
 				} else {
 					echo "error-bulk-delete";
 				}
+			} else {
+				echo "error-bulk-delete";
 			}
 			exit;
 		}
@@ -116,43 +104,32 @@ if(isset($all_setttings['show_query'])) {
 	</thead>
 	<tbody>
 		<?php
-			//fetch all user queries
+			// Fetch total user queries count efficiently
 			global $wpdb;
 			$contact_form_table_name = $wpdb->prefix . 'awp_contact_form';
-			$all_contact_queries_result = $wpdb->get_results("SELECT * FROM `$contact_form_table_name`", OBJECT );
+			$total_records = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `$contact_form_table_name`" );
 			
-			// pagination limit start
-			$per_page = $show_record_per_page;															// number of results to show per page
-			$total_results = $all_contact_queries_result;							// all results
-			$total_pages = ceil(count($all_contact_queries_result) / $per_page);	// total pages we going to have
-			$show_page = 1;															// which page will be display
+			// Pagination limit start
+			$per_page = max( 1, (int) $show_record_per_page );
+			$total_pages = (int) ceil( $total_records / $per_page );
+			$show_page = 1;
 
-			//-------------if page is set check------------------//
-			if (isset($_GET['page_no'])) {
-				$show_page =sanitize_text_field($_GET['page_no']);             //it will tells the current page
-				if ($show_page > 0 && $show_page <= $total_pages) {
-					$start = ($show_page - 1) * $per_page;
-					$end = $start + $per_page;
-				} else {
-					// error - show first set of results
-					$start = 0;              
-					$end = $per_page;
+			if ( isset( $_GET['page_no'] ) ) {
+				$show_page = absint( $_GET['page_no'] );
+				if ( $show_page < 1 ) {
+					$show_page = 1;
+				} elseif ( $total_pages > 0 && $show_page > $total_pages ) {
+					$show_page = $total_pages;
 				}
-			} else {
-				// if page isn't set, show first set of results
-				$start = 0;
-				$end = $per_page;
 			}
-			// display pagination
-			if(isset($_GET['page_no'])) {
-				$page = intval($_GET['page_no']);
-			} else {
-				$page = 5;
-			}
+			$start = ( $show_page - 1 ) * $per_page;
 			$tpages = $total_pages;
-			if ($page <= 0) $page = 1;
-			// pagination limit end
-			$new_all_contact_queries_result = $wpdb->get_results("SELECT * FROM `$contact_form_table_name` ORDER BY date_time DESC LIMIT $per_page OFFSET $start", OBJECT );
+
+			// Fetch only current page records using prepared statement
+			$new_all_contact_queries_result = $wpdb->get_results(
+				$wpdb->prepare( "SELECT * FROM `$contact_form_table_name` ORDER BY date_time DESC LIMIT %d OFFSET %d", $per_page, $start ),
+				OBJECT
+			);
 
 			//print_r($new_all_contact_queries_result);
 			if(count($new_all_contact_queries_result)){
@@ -200,44 +177,46 @@ if(isset($all_setttings['show_query'])) {
 			/*--------------------------------------------------------------------------------------------
 			|    @desc:         pagination 
 			---------------------------------------------------------------------------------------------*/
-			function paginate($reload, $page, $tpages) {
-				$adjacents = 1;
-				$prevlabel = "&lsaquo; Prev";
-				$nextlabel = "Next &rsaquo;";
-				$out = "";
-				// previous
-				if ($page == 1) {
-					$out.= "";
-				} elseif ($page == 2) {
-					$out.= "<li><a  href=\"" . $reload . "\">" . $prevlabel . "</a>\n</li>";
-				} else {
+			if ( ! function_exists( 'cfw_paginate' ) ) {
+				function cfw_paginate($reload, $page, $tpages) {
+					$adjacents = 1;
+					$prevlabel = "&lsaquo; Prev";
+					$nextlabel = "Next &rsaquo;";
+					$out = "";
 					// previous
-					$out.= "<li><a  href=\"" . $reload . "&amp;page_no=" . ($page - 1) . "\">" . $prevlabel . "</a>\n</li>";//beech ka diffrance change krega 
-				}
-			  
-				$pmin = ($page > $adjacents) ? ($page - $adjacents) : 1;
-				$pmax = ($page < ($tpages - $adjacents)) ? ($page + $adjacents) : $tpages;
-				for ($i = $pmin; $i <= $pmax; $i++) {
-					if ($i == $page) {
-						$out.= "<li  class=\"active\"><a href=''>" . $i . "</a></li>\n";
-					} elseif ($i == 1) {
-						$out.= "<li><a  href=\"" . $reload . "\">" . $i . "</a>\n</li>";
+					if ($page == 1) {
+						$out.= "";
+					} elseif ($page == 2) {
+						$out.= "<li><a  href=\"" . $reload . "\">" . $prevlabel . "</a>\n</li>";
 					} else {
-						$out.= "<li><a  href=\"" . $reload . "&amp;page_no=" . $i . "\">" . $i . "</a>\n</li>";
+						// previous
+						$out.= "<li><a  href=\"" . $reload . "&amp;page_no=" . ($page - 1) . "\">" . $prevlabel . "</a>\n</li>";
 					}
-				}
-				
-				if ($page < ($tpages - $adjacents)) {
-					$out.= "<li><a href=\"" . $reload . "&amp;page_no=" . $tpages . "\">" . $tpages . "</a></li>\n";
-				}
-				// next
-				if ($page < $tpages) {
-					$out.= "<li><a href=\"" . $reload . "&amp;page_no=" . ($page + 1) . "\">" . $nextlabel . "</a></li>";
-				} else {
+				  
+					$pmin = ($page > $adjacents) ? ($page - $adjacents) : 1;
+					$pmax = ($page < ($tpages - $adjacents)) ? ($page + $adjacents) : $tpages;
+					for ($i = $pmin; $i <= $pmax; $i++) {
+						if ($i == $page) {
+							$out.= "<li  class=\"active\"><a href=''>" . $i . "</a></li>\n";
+						} elseif ($i == 1) {
+							$out.= "<li><a  href=\"" . $reload . "\">" . $i . "</a>\n</li>";
+						} else {
+							$out.= "<li><a  href=\"" . $reload . "&amp;page_no=" . $i . "\">" . $i . "</a>\n</li>";
+						}
+					}
+					
+					if ($page < ($tpages - $adjacents)) {
+						$out.= "<li><a href=\"" . $reload . "&amp;page_no=" . $tpages . "\">" . $tpages . "</a></li>\n";
+					}
+					// next
+					if ($page < $tpages) {
+						$out.= "<li><a href=\"" . $reload . "&amp;page_no=" . ($page + 1) . "\">" . $nextlabel . "</a></li>";
+					} else {
+						$out.= "";
+					}
 					$out.= "";
+					return $out;
 				}
-				$out.= "";
-				return $out;
 			}
 			?>			
 			<td colspan="7" class="text-center">
@@ -245,7 +224,7 @@ if(isset($all_setttings['show_query'])) {
 				$reload = admin_url( 'admin.php?page=cfw-all-queries&tpages=' . $tpages );
 				echo '<ul class="pagination">';
 				if ($total_pages > 1) {
-					echo paginate($reload, $show_page, $total_pages);
+					echo cfw_paginate($reload, $show_page, $total_pages);
 				}
 				echo "</ul>";
 				?>

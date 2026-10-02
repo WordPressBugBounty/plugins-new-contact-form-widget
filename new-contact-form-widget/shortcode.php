@@ -3,139 +3,41 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 function contact_form_shortcode_function( $atts ){
 ob_start();
-	// load saved setting from option table
+	// load saved setting from option table with safe PHP 8 fallbacks
 	$all_setttings = get_option('contact_form_settings');
-	//print_r($all_setttings);
-		if(isset($all_setttings)){
-		// Design Setting	
-		if($all_setttings['contact_form_template']) 
-			$contact_form_template = $all_setttings['contact_form_template'];
-		else 
-			$contact_form_template = "template1";
-		
-		if($all_setttings['title_field']) 
-			$title_field = $all_setttings['title_field'];
-		else 
-			$title_field = "Contact Form";
-		
-		if($all_setttings['title_color']) 
-			$title_color = $all_setttings['title_color'];
-		else 
-			$title_color = "#FAFAFA";
-		
-		$contact_form_width = isset($all_setttings['contact_form_width']) ? $all_setttings['contact_form_width'] : "35";
-		$cfw_form_order = isset($all_setttings['cfw_form_order']) ? $all_setttings['cfw_form_order'] : "center";
-		$bg_color = isset($all_setttings['bg_color']) ? $all_setttings['bg_color'] : "#FFFFFF";
-
-		if($all_setttings['description_field']) 
-			$description_field = $all_setttings['description_field'];
-		else 
-			$description_field = "Please fill below form if you have any query with us.";
-		
-		if($all_setttings['name_field']) 
-			$name_field = $all_setttings['name_field'];
-		else 
-			$name_field = "Type Your Name Here";
-		
-		if($all_setttings['email_field']) 
-			$email_field = $all_setttings['email_field'];
-		else 
-			$email_field = "Type Your Email Here";
-		
-		if($all_setttings['subject_field']) 
-			$subject_field = $all_setttings['subject_field'];
-		else 
-			$subject_field = "Type Your Query Subject Here";
-		
-		if($all_setttings['message_field']) 
-			$message_field = $all_setttings['message_field'];
-		else 
-			$message_field = "Type Your Query Message Here";
-	
-	
-		if($all_setttings['name_error_field']) 
-			$name_error_field = $all_setttings['name_error_field'];
-		else 
-			$name_error_field = "Name cannot be blank.";
-	
-		if($all_setttings['email_error_field']) 
-				$email_error_field = $all_setttings['email_error_field'];
-			else 
-				$email_error_field = "Email cannot be blank.";
-		
-		if($all_setttings['email_error_field_2']) 
-				$email_error_field_2 = $all_setttings['email_error_field_2'];
-			else 
-				$email_error_field_2 = "Email is invalid.";
-		
-		if($all_setttings['subject_error_field']) 
-				$subject_error_field = $all_setttings['subject_error_field'];
-			else 
-				$subject_error_field = "Subject cannot be blank.";
-		
-		if($all_setttings['message_error_field']) 
-				$message_error_field = $all_setttings['message_error_field'];
-			else 
-				$message_error_field = "Message cannot be blank.";
-
-		if($all_setttings['show_query']) 
-			$show_query = $all_setttings['show_query'];
-		else 
-			$show_query = 10;
-
-		if($all_setttings['sb_button_text']) 
-			$sb_button_text = $all_setttings['sb_button_text'];
-		else 
-			$sb_button_text = "Submit";
-		
-		if($all_setttings['cus_css']) 
-			$cus_css = $all_setttings['cus_css'];
-		else 
-			$cus_css = "";
-	
-		// Message Setting
-		if($all_setttings['qsm']) 
-			$qsm = $all_setttings['qsm'];
-		else 
-			$qsm = "Thank you for submitting query. We will be back to you shortly.";
-		
-		if($all_setttings['qfm'])
-			$qfm = $all_setttings['qfm'];
-		else
-			$qfm = "Sorry! contact from not working properly. Please directly contact to site admin using this email: ".get_option( 'admin_email' );
-	} else {
-		
-		$contact_form_template = "template1";
-		$title_field = "Contact Form";
-		$title_color = "#FAFAFA";
-		$bg_color = "#ffffff";
-		$contact_form_width = 35;
-		$cfw_form_order = "center";
-		$description_field = "Please fill below form if you have any query with us.";
-		$name_field = "Type Your Name Here";
-		$email_field = "Type Your Email Here";
-		$subject_field = "Type Your Query Subject Here";
-		$message_field = "Type Your Query Message Here";
-		$name_error_field = "Name cannot be blank.";
-		$email_error_field = "Email cannot be blank.";
-		$email_error_field_2 = "Email is invalid.";
-		$subject_error_field = "Subject cannot be blank.";
-		$message_error_field = "Message cannot be blank.";
-		$show_query = 10;
-		$sb_button_text = "Submit";
-		$cus_css= "";
-		
-		$qsm = "Thank you for submitting query. We will be back to you shortly.";
-		$qfm = "Sorry! contact from not working properly. Please directly contact to site admin using this email: ".get_option( 'admin_email' );	
+	if ( ! is_array( $all_setttings ) ) {
+		$all_setttings = array();
 	}
+
+	$contact_form_template = ! empty( $all_setttings['contact_form_template'] ) ? $all_setttings['contact_form_template'] : "template1";
+	$title_field           = ! empty( $all_setttings['title_field'] ) ? $all_setttings['title_field'] : "Contact Form";
+	$title_color           = ! empty( $all_setttings['title_color'] ) ? $all_setttings['title_color'] : "#000000";
+	$contact_form_width    = ! empty( $all_setttings['contact_form_width'] ) ? $all_setttings['contact_form_width'] : "35";
+	$cfw_form_order        = ! empty( $all_setttings['cfw_form_order'] ) ? $all_setttings['cfw_form_order'] : "center";
+	$bg_color              = ! empty( $all_setttings['bg_color'] ) ? $all_setttings['bg_color'] : "#FFFFFF";
+	$description_field     = ! empty( $all_setttings['description_field'] ) ? $all_setttings['description_field'] : "Please fill below form if you have any query with us.";
+	$name_field            = ! empty( $all_setttings['name_field'] ) ? $all_setttings['name_field'] : "Type Your Name Here";
+	$email_field           = ! empty( $all_setttings['email_field'] ) ? $all_setttings['email_field'] : "Type Your Email Here";
+	$subject_field         = ! empty( $all_setttings['subject_field'] ) ? $all_setttings['subject_field'] : "Type Your Query Subject Here";
+	$message_field         = ! empty( $all_setttings['message_field'] ) ? $all_setttings['message_field'] : "Type Your Query Message Here";
+	$name_error_field      = ! empty( $all_setttings['name_error_field'] ) ? $all_setttings['name_error_field'] : "Name cannot be blank.";
+	$email_error_field     = ! empty( $all_setttings['email_error_field'] ) ? $all_setttings['email_error_field'] : "Email cannot be blank.";
+	$email_error_field_2   = ! empty( $all_setttings['email_error_field_2'] ) ? $all_setttings['email_error_field_2'] : "Email is invalid.";
+	$subject_error_field   = ! empty( $all_setttings['subject_error_field'] ) ? $all_setttings['subject_error_field'] : "Subject cannot be blank.";
+	$message_error_field   = ! empty( $all_setttings['message_error_field'] ) ? $all_setttings['message_error_field'] : "Message cannot be blank.";
+	$show_query            = ! empty( $all_setttings['show_query'] ) ? $all_setttings['show_query'] : 10;
+	$sb_button_text        = ! empty( $all_setttings['sb_button_text'] ) ? $all_setttings['sb_button_text'] : "Submit";
+	$cus_css               = ! empty( $all_setttings['cus_css'] ) ? $all_setttings['cus_css'] : "";
+	$qsm                   = ! empty( $all_setttings['qsm'] ) ? $all_setttings['qsm'] : "Thank you for submitting query. We will be back to you shortly.";
+	$qfm                   = ! empty( $all_setttings['qfm'] ) ? $all_setttings['qfm'] : "Sorry! contact from not working properly. Please directly contact site admin using this email: " . get_option( 'admin_email' );
 	?>
 	
 
 	<style>	
-		.cwf-title {
+		.cfw-container .cwf-title {
 			color:<?php echo esc_attr($title_color); ?> !important;
 		}
-		.cwf-desc {
+		.cfw-container .cwf-desc {
 			color:<?php echo esc_attr($title_color); ?> !important;
 		}
 		.cfw-form {
@@ -159,20 +61,21 @@ ob_start();
 			justify-content: <?php echo esc_attr($cfw_form_order); ?>;
 		}
 
-		.form-group {
+		.cfw-container .form-group {
 			padding-top:15px;
 			padding-bottom:15px;		
 		}
-		.cfw-error {
+		.cfw-container .cfw-error {
 			display: none;
 			padding: 7px !important;
 		}
-		 button {
+		.cfw-container button.cfw-submit-btn,
+		.cfw-container .btn-primary {
             width: 100%;
             font-size: 20px!important;
         }
-			<?php echo wp_strip_all_tags($cus_css); ?>
-		</style>
+		<?php echo wp_strip_all_tags($cus_css); ?>
+	</style>
 		<?php 
 			if ($contact_form_template == 'template1') {
 				include 'css/template/form-one.php';
@@ -211,19 +114,25 @@ ob_start();
 						<p class="cfw-error message-error alert alert-warning"><strong><?php echo esc_html($message_error_field); ?></strong></p>
 					</div>
 					
+					<!-- Honeypot anti-spam field -->
+					<div class="cfw-hp-wrap" style="display:none !important; visibility:hidden !important; position:absolute !important; left:-9999px !important;">
+						<label for="cfw_hp_check"><?php esc_html_e( 'Leave this field blank', 'new-contact-form-widget' ); ?></label>
+						<input type="text" name="cfw_hp_check" id="cfw_hp_check" value="" autocomplete="off" tabindex="-1">
+					</div>
+
 					<div class="form-group">
-						<button type="button" class="btn btn-primary"  onclick="return ValidateForm('<?php echo esc_js(wp_create_nonce( "cfw_query_nonce" )); ?>');"><?php echo esc_html($sb_button_text); ?></button>
+						<button type="button" class="btn btn-primary cfw-submit-btn" onclick="return ValidateForm('<?php echo esc_js(wp_create_nonce( "cfw_query_nonce" )); ?>', this);"><?php echo esc_html($sb_button_text); ?></button>
 					</div>
 				</form>
 			
 				<!--loading icon-->
-				<div id="awp-loading-icon" class="text-center" style="display: none;">
+				<div id="awp-loading-icon" class="awp-loading-icon text-center" style="display: none;">
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><br>
 					<?php esc_html_e('Please wait submitting your query.', 'new-contact-form-widget'); ?>
 				</div>
 				
 				<!--Ajax result-->
-				<div id="contact-result" style="display: none;">
+				<div id="contact-result" class="contact-result" style="display: none;">
 				</div>
 			</div>
 		</div>
